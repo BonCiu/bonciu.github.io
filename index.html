@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>MOONGAMES - ANTYBOT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE-edge">
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<style>
+		@font-face {
+			font-family: 'Haker';
+			src: url('font.ttf') format("truetype");
+		}
+
+		body {
+			text-align: center;
+			color: #ffffff !important;
+		}
+
+		.g-recaptcha {
+			display: inline-block;
+		}
+
+		.text-shadow {
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+		}
+
+		.text-light {
+			font-weight: 300;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin: .625rem 0;
+		}
+
+		.padding30 {
+			padding: 1.875rem;
+		}
+
+		h1 {
+			font: 400 2.25rem/1.1 "Haker", "Segoe UI", "Open Sans", sans-serif, serif;
+		}
+
+		.sub-leader {
+			font: 500 1.875rem/1.1 "Haker", "Segoe UI", "Open Sans", sans-serif, serif;
+		}
+
+		@media screen and (min-width: 1401px) {
+			html {
+				font-size: 120%;
+			}
+		}
+
+		@media screen and (max-width: 1400px) {
+			html {
+				font-size: 110%;
+			}
+		}
+
+		@media screen and (max-width: 1200px) {
+			html {
+				font-size: 100%;
+			}
+		}
+
+		@media screen and (max-width: 768px) {
+			html {
+				font-size: 100%;
+			}
+		}
+
+		@media screen and (max-width: 640px) {
+			html {
+				font-size: 90%;
+			}
+		}
+
+		@media screen and (max-width: 320px) {
+			html {
+				font-size: 80%;
+			}
+		}
+
+		@media screen and (max-width: 800px) {
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p {
+				margin: .625rem;
+			}
+		}
+
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+		}
+
+		html,
+		body,
+		* {
+			box-sizing: border-box;
+		}
+
+		* {
+			border-collapse: collapse;
+		}
+
+		body {
+			background: #681baf;
+			background: linear-gradient(bottom, #681baf, #681baf);
+		}
+
+		.z {
+			position: absolute;
+			bottom: 0;
+			will-change: transform;
+			-webkit-animation: animacja 4s infinite ease-in;
+			-moz-animation: animacja 4s infinite ease-in;
+			-ms-animation: animacja 4s infinite ease-in;
+			animation: animacja 4s infinite ease-in;
+			opacity: 0;
+		}
+
+		.q {
+			width: 6px;
+			height: 6px;
+			margin: 0 auto;
+			border: 1px solid rgba(255, 255, 255, 0.5);
+			background: rgba(255, 255, 255, 0.25);
+			will-change: transform;
+			border-radius: 10px;
+			-webkit-animation: drgania 0.4s infinite linear;
+			-moz-animation: drgania 0.4s infinite linear;
+			-ms-animation: drgania 0.4s infinite linear;
+			animation: drgania 0.4s infinite linear;
+		}
+
+		.o {
+			position: absolute;
+			width: 100%;
+			left: 0px;
+			top: 0%;
+			height: 100%;
+			z-index: 1;
+			animation: startanim 1.5s 1.5s ease-out;
+			background: #681baf;
+			background: linear-gradient(bottom, #681baf, #681baf);
+			animation-fill-mode: forwards;
+		}
+
+		.f {
+			border: 1px solid rgba(255, 255, 255, 0.5);
+			background: rgba(255, 255, 255, 0.39);
+		}
+
+		@-webkit-keyframes animacja {
+			0% {
+				bottom: 0;
+				opacity: 0;
+			}
+			5% {
+				bottom: 0;
+				opacity: 1;
+			}
+			99% {
+				opacity: 1;
+			}
+			100% {
+				bottom: 100%;
+				opacity: 0;
+			}
+		}
+
+		@-moz-keyframes animacja {
+			0% {
+				bottom: 0;
+				opacity: 0;
+			}
+			5% {
+				bottom: 0;
+				opacity: 1;
+			}
+			99% {
+				opacity: 1;
+			}
+			100% {
+				bottom: 100%;
+				opacity: 0;
+			}
+		}
+
+		@-ms-keyframes animacja {
+			0% {
+				bottom: 0;
+				opacity: 0;
+			}
+			5% {
+				bottom: 0;
+				opacity: 1;
+			}
+			99% {
+				opacity: 1;
+			}
+			100% {
+				bottom: 100%;
+				opacity: 0;
+			}
+		}
+
+		@keyframes animacja {
+			0% {
+				bottom: 0;
+				opacity: 0;
+			}
+			5% {
+				bottom: 0;
+				opacity: 1;
+			}
+			99% {
+				opacity: 1;
+			}
+			100% {
+				bottom: 100%;
+				opacity: 0;
+			}
+		}
+
+		@-webkit-keyframes drgania {
+			0% {
+				margin-left: 0;
+			}
+			50% {
+				margin-left: 2px;
+			}
+		}
+
+		@-moz-keyframes drgania {
+			0% {
+				margin-left: 0;
+			}
+			50% {
+				margin-left: 2px;
+			}
+		}
+
+		@-ms-keyframes drgania {
+			0% {
+				margin-left: 0;
+			}
+			50% {
+				margin-left: 2px;
+			}
+		}
+
+		@keyframes drgania {
+			0% {
+				margin-left: 0;
+			}
+			50% {
+				margin-left: 2px;
+			}
+		}
+
+		@keyframes startanim {
+			0% {
+				width: 100%;
+				left: 0px;
+				top: 0%;
+				height: 100%;
+			}
+			100% {
+				width: 100%;
+				left: 0px;
+				top: 100%;
+				height: 0%;
+			}
+		}
+	</style>
+<script>
+		function j(e) {
+			document.getElementById("zawartosc").innerHTML = "<div class=\"padding30 sub-leader text-light\">" + e + "</div>";
+		}
+		function k(e) {
+			j("Wysylanie rozwiazania...");
+			var x = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+			x.onreadystatechange = function (ex) {
+				if (x.readyState == 4)
+					j(x.responseText);
+				else
+					j("Wysylanie rozwiazania..." + (x.readyState * 25) + "%");
+			}
+			x.open("POST", "/check", true);
+			x.send(e);
+		}
+	</script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.7";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+<div id="n"></div>
+<script>
+		var a = document.getElementById("n");
+		var e = 5 + Math.floor(Math.random() * 5);
+		for (var i = 0; i < e; i++) {
+			var f = Math.floor(Math.random() * 3);
+			var g = Math.floor(Math.random() * 16);
+			var h = 3 + Math.floor(Math.random() * 9);
+			a.innerHTML += '<div class="z" style="-webkit-animation-duration: ' + h + 's;' +
+				'-moz-animation-duration: ' + h + 's;' +
+				'-ms-animation-duration: ' + h + 's;' +
+				'animation-duration: ' + h + 's;' +
+				'-webkit-animation-delay: ' + g + 's;' +
+				'-moz-animation-delay: ' + g + 's;' +
+				'-ms-animation-delay: ' + g + 's;' +
+				'animation-delay: ' + g + 's;' +
+				'-webkit-filter: ' + 'blur(' + f + 'px);' +
+				'-moz-filter: ' + 'blur(' + f + 'px);' +
+				'-ms-filter: ' + 'blur(' + f + 'px);' +
+				'filter: ' + 'blur(' + f + 'px);' + '"><div class="q"></div></div>';
+		}
+		var b = document.getElementsByClassName("z");
+		for (var i = 0; i < b.length; i++) {
+			var c = Math.floor(Math.random() * 100);
+			var d = 50 + Math.floor(Math.random() * 50);
+			b[i].style.right = c + '%';
+			b[i].childNodes[0].style.width = b[i].childNodes[0].style.height = d + 'px';
+		}
+	</script>
+<br>
+<br>
+<br>
+<h1 style="font-size: 4.5rem; line-height: 1; color: #86FF5A" class="text-shadow metro-title text-light">ZWERYIFKUJ KONTO</h1>
+<div id="zawartosc">
+<div class="padding30 sub-leader text-light">Weryfikacja antybot na MoonGames.PL
+<br />Aby grac na
+<span style="color: #FF6142">MoonGames.PL</span> rozwiaz test captcha!</div>
+<div class="g-recaptcha" data-callback="k" data-sitekey="6LeDQ5obAAAAAIJql6_WmopLOeTb3AvrJJyUtp4-"></div>
+</div>
+<br>
+<br>
+<div class="f">
+<script src="https://apis.google.com/js/platform.js"></script>
+<div class="g-ytsubscribe" data-href="https://www.youtube.com/channel/UCIGxdA9y_i04pl3BAtUOfgg" data-layout="full" data-count="default"></div>
+<div class="fb-like" data-href="https://www.facebook.com/MoonGamesPL-103776561933302" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+</div>
+<br>
+<br>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7215363960396524" data-ad-slot="8085733898" data-ad-format="auto"></ins>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7215363960396524" data-ad-slot="8085733898" data-ad-format="auto"></ins>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7215363960396524" data-ad-slot="8085733898" data-ad-format="auto"></ins>
+<script>
+		var adsbygoogle = window.adsbygoogle || [];
+		adsbygoogle.push({});
+		adsbygoogle.push({});
+		adsbygoogle.push({});
+	</script>
+<div class="o"></div>
+</body>
+</html>

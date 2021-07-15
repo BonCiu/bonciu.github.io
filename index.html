@@ -1,377 +1,153 @@
-<!DOCTYPE HTML>
-<html>
+
+<!doctype html>
+<html lang="pl">
 <head>
-<title>MOONGAMES - ANTYBOT</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta http-equiv="X-UA-Compatible" content="IE-edge">
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<style>
-		@font-face {
-			font-family: 'Haker';
-			src: url('font.ttf') format("truetype");
-		}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>MoonGames.PL</title>
+<meta property="og:site_name" content="MoonGames.PL">
+<meta property="og:title" content="MoonGames.PL">
+<meta property="og:url" content="https://moongames.pl/">
+<meta name="theme-color" content="#1CD848">
+<meta property="og:type" content="website">
+<meta name="og:locale" content="pl_PL">
+<meta name="og:type" content="website">
+<link rel="icon" type="image/png" href="https://jeezitmc.pl/assets/img/icon.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" href="https://jeezitmc.pl/assets/css/style.css">
 
-		body {
-			text-align: center;
-			color: #ffffff !important;
-		}
-
-		.g-recaptcha {
-			display: inline-block;
-		}
-
-		.text-shadow {
-			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-		}
-
-		.text-light {
-			font-weight: 300;
-			font-style: normal;
-		}
-
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			margin: .625rem 0;
-		}
-
-		.padding30 {
-			padding: 1.875rem;
-		}
-
-		h1 {
-			font: 400 2.25rem/1.1 "Haker", "Segoe UI", "Open Sans", sans-serif, serif;
-		}
-
-		.sub-leader {
-			font: 500 1.875rem/1.1 "Haker", "Segoe UI", "Open Sans", sans-serif, serif;
-		}
-
-		@media screen and (min-width: 1401px) {
-			html {
-				font-size: 120%;
-			}
-		}
-
-		@media screen and (max-width: 1400px) {
-			html {
-				font-size: 110%;
-			}
-		}
-
-		@media screen and (max-width: 1200px) {
-			html {
-				font-size: 100%;
-			}
-		}
-
-		@media screen and (max-width: 768px) {
-			html {
-				font-size: 100%;
-			}
-		}
-
-		@media screen and (max-width: 640px) {
-			html {
-				font-size: 90%;
-			}
-		}
-
-		@media screen and (max-width: 320px) {
-			html {
-				font-size: 80%;
-			}
-		}
-
-		@media screen and (max-width: 800px) {
-			h1,
-			h2,
-			h3,
-			h4,
-			h5,
-			h6,
-			p {
-				margin: .625rem;
-			}
-		}
-
-		html,
-		body {
-			padding: 0;
-			margin: 0;
-			height: 100%;
-		}
-
-		html,
-		body,
-		* {
-			box-sizing: border-box;
-		}
-
-		* {
-			border-collapse: collapse;
-		}
-
-		body {
-			background: #681baf;
-			background: linear-gradient(bottom, #681baf, #681baf);
-		}
-
-		.z {
-			position: absolute;
-			bottom: 0;
-			will-change: transform;
-			-webkit-animation: animacja 4s infinite ease-in;
-			-moz-animation: animacja 4s infinite ease-in;
-			-ms-animation: animacja 4s infinite ease-in;
-			animation: animacja 4s infinite ease-in;
-			opacity: 0;
-		}
-
-		.q {
-			width: 6px;
-			height: 6px;
-			margin: 0 auto;
-			border: 1px solid rgba(255, 255, 255, 0.5);
-			background: rgba(255, 255, 255, 0.25);
-			will-change: transform;
-			border-radius: 10px;
-			-webkit-animation: drgania 0.4s infinite linear;
-			-moz-animation: drgania 0.4s infinite linear;
-			-ms-animation: drgania 0.4s infinite linear;
-			animation: drgania 0.4s infinite linear;
-		}
-
-		.o {
-			position: absolute;
-			width: 100%;
-			left: 0px;
-			top: 0%;
-			height: 100%;
-			z-index: 1;
-			animation: startanim 1.5s 1.5s ease-out;
-			background: #681baf;
-			background: linear-gradient(bottom, #681baf, #681baf);
-			animation-fill-mode: forwards;
-		}
-
-		.f {
-			border: 1px solid rgba(255, 255, 255, 0.5);
-			background: rgba(255, 255, 255, 0.39);
-		}
-
-		@-webkit-keyframes animacja {
-			0% {
-				bottom: 0;
-				opacity: 0;
-			}
-			5% {
-				bottom: 0;
-				opacity: 1;
-			}
-			99% {
-				opacity: 1;
-			}
-			100% {
-				bottom: 100%;
-				opacity: 0;
-			}
-		}
-
-		@-moz-keyframes animacja {
-			0% {
-				bottom: 0;
-				opacity: 0;
-			}
-			5% {
-				bottom: 0;
-				opacity: 1;
-			}
-			99% {
-				opacity: 1;
-			}
-			100% {
-				bottom: 100%;
-				opacity: 0;
-			}
-		}
-
-		@-ms-keyframes animacja {
-			0% {
-				bottom: 0;
-				opacity: 0;
-			}
-			5% {
-				bottom: 0;
-				opacity: 1;
-			}
-			99% {
-				opacity: 1;
-			}
-			100% {
-				bottom: 100%;
-				opacity: 0;
-			}
-		}
-
-		@keyframes animacja {
-			0% {
-				bottom: 0;
-				opacity: 0;
-			}
-			5% {
-				bottom: 0;
-				opacity: 1;
-			}
-			99% {
-				opacity: 1;
-			}
-			100% {
-				bottom: 100%;
-				opacity: 0;
-			}
-		}
-
-		@-webkit-keyframes drgania {
-			0% {
-				margin-left: 0;
-			}
-			50% {
-				margin-left: 2px;
-			}
-		}
-
-		@-moz-keyframes drgania {
-			0% {
-				margin-left: 0;
-			}
-			50% {
-				margin-left: 2px;
-			}
-		}
-
-		@-ms-keyframes drgania {
-			0% {
-				margin-left: 0;
-			}
-			50% {
-				margin-left: 2px;
-			}
-		}
-
-		@keyframes drgania {
-			0% {
-				margin-left: 0;
-			}
-			50% {
-				margin-left: 2px;
-			}
-		}
-
-		@keyframes startanim {
-			0% {
-				width: 100%;
-				left: 0px;
-				top: 0%;
-				height: 100%;
-			}
-			100% {
-				width: 100%;
-				left: 0px;
-				top: 100%;
-				height: 0%;
-			}
-		}
-	</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-196077069-1">
+    </script>
 <script>
-		function j(e) {
-			document.getElementById("zawartosc").innerHTML = "<div class=\"padding30 sub-leader text-light\">" + e + "</div>";
-		}
-		function k(e) {
-			j("Wysylanie rozwiazania...");
-			var x = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-			x.onreadystatechange = function (ex) {
-				if (x.readyState == 4)
-					j(x.responseText);
-				else
-					j("Wysylanie rozwiazania..." + (x.readyState * 25) + "%");
-			}
-			x.open("POST", "/check", true);
-			x.send(e);
-		}
-	</script>
-</head>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-196077069-1');
+    </script>
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
 <body>
-<div id="fb-root"></div>
-<script>(function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.7";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-<div id="n"></div>
-<script>
-		var a = document.getElementById("n");
-		var e = 5 + Math.floor(Math.random() * 5);
-		for (var i = 0; i < e; i++) {
-			var f = Math.floor(Math.random() * 3);
-			var g = Math.floor(Math.random() * 16);
-			var h = 3 + Math.floor(Math.random() * 9);
-			a.innerHTML += '<div class="z" style="-webkit-animation-duration: ' + h + 's;' +
-				'-moz-animation-duration: ' + h + 's;' +
-				'-ms-animation-duration: ' + h + 's;' +
-				'animation-duration: ' + h + 's;' +
-				'-webkit-animation-delay: ' + g + 's;' +
-				'-moz-animation-delay: ' + g + 's;' +
-				'-ms-animation-delay: ' + g + 's;' +
-				'animation-delay: ' + g + 's;' +
-				'-webkit-filter: ' + 'blur(' + f + 'px);' +
-				'-moz-filter: ' + 'blur(' + f + 'px);' +
-				'-ms-filter: ' + 'blur(' + f + 'px);' +
-				'filter: ' + 'blur(' + f + 'px);' + '"><div class="q"></div></div>';
-		}
-		var b = document.getElementsByClassName("z");
-		for (var i = 0; i < b.length; i++) {
-			var c = Math.floor(Math.random() * 100);
-			var d = 50 + Math.floor(Math.random() * 50);
-			b[i].style.right = c + '%';
-			b[i].childNodes[0].style.width = b[i].childNodes[0].style.height = d + 'px';
-		}
-	</script>
-<br>
-<br>
-<br>
-<h1 style="font-size: 4.5rem; line-height: 1; color: #86FF5A" class="text-shadow metro-title text-light">ZWERYIFKUJ KONTO</h1>
-<div id="zawartosc">
-<div class="padding30 sub-leader text-light">Weryfikacja antybot na MoonGames.PL
-<br />Aby grac na
-<span style="color: #FF6142">MoonGames.PL</span> rozwiaz test captcha!</div>
-<div class="g-recaptcha" data-callback="k" data-sitekey="6LeDQ5obAAAAAIJql6_WmopLOeTb3AvrJJyUtp4-"></div>
+<nav class="navbar navbar-expand-lg navbar-dark">
+<a class="navbar-brand" href="https://jeezitmc.pl" data-aos="fade-down" data-aos-delay="250"><img src="https://jeezitmc.pl/assets/img/logo.png">JEEZITMC.PL</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarText">
+<ul class="navbar-nav mb-2 mb-lg-0">
+<li class="nav-item" data-aos="fade-down" data-aos-delay="250">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="200">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="150">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="100">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="50">
+<a class="nav-link active" aria-current="page" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="100">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="150">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="200">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+<li class="nav-item" data-aos="fade-down" data-aos-delay="250">
+<a class="nav-link" href="https://moongames.pl">SOON</a>
+</li>
+</ul>
+<a class="navbar-shop" href="https://moongames.pl" data-aos="fade-down" data-aos-delay="250">DISCORD</a>
 </div>
-<br>
-<br>
-<div class="f">
-<script src="https://apis.google.com/js/platform.js"></script>
-<div class="g-ytsubscribe" data-href="https://www.youtube.com/channel/UCIGxdA9y_i04pl3BAtUOfgg" data-layout="full" data-count="default"></div>
-<div class="fb-like" data-href="https://www.facebook.com/MoonGamesPL-103776561933302" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+</nav>
+<header id="header">
+<div class="header-text">
+<div class="text-center" data-aos="zoom-in-up">
+<img src="https://jeezitmc.pl/assets/img/logo.png">
+<h1 data-aos="zoom-in">Siec serwerow, Soon...</h1>
 </div>
+<div class="header-stats" data-aos="zoom-in-up" data-aos-delay="300">
+<div class="row">
+<div class="col-6">
+<a type="button" class="header-button copy-ip">SKOPIUJ IP</a>
+</div>
+<div class="col-6">
+<a class="header-button">ONLINE: 0/0</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<section id="presentation">
+<div class="container">
+<h1 data-aos="fade-up">ZWIASTUN SERWERA</h1>
 <br>
-<br>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7215363960396524" data-ad-slot="8085733898" data-ad-format="auto"></ins>
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7215363960396524" data-ad-slot="8085733898" data-ad-format="auto"></ins>
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7215363960396524" data-ad-slot="8085733898" data-ad-format="auto"></ins>
+<iframe src="https://iframe.videodelivery.net/787157450fd8918c0165571e60104fb3?loop=true" style="border: none; width: 1052px; height: 491px;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
+</div>
+</section>
+<footer id="footer">
+<div class="footer-card">
+<div class="row">
+<div class="col-lg-4 text-end footer-padding">
+<h4>SOCIAL MEDIA</h4>
+<a href="https://moongames.pl" target="_blank"><i class="fab fa-SOON"></i></a>
+<a href="https://moongames.pl" target="_blank"><i class="fab fa-SOON"></i></a>
+<a href="https://moongames.pl" target="_blank"><i class="fab fa-SOON"></i></a>
+<a href="https://moongames.pl" target="_blank"><i class="fab fa-SOON"></i></a>
+</div>
+<div class="col-lg-4">
+<h4>Jesteśmy partnerem<br>Main DataCenter</h4>
+<a href="https://main.pl" target="_blank"><img src="https://jeezitmc.pl/assets/img/czarne_main_dc.svg"></a>
+</div>
+<div class="col-lg-4 text-start footer-padding">
+<h3><a href="https://moongames.pl">SOON</a></h3>
+<h3><a href="https://moongames.pl">SOON</a></h3>
+</div>
+</div>
+<div class="border-footer"></div>
+<h5>MOONGAMES.PL &copy; WSZELKIE PRAWA ZASTRZEŻONE</h5>
+<h6>WYKONANE PRZEZ <a href="https://spacecode.pl/" target="_blank">BONCIUCODE - MOONGAMES</a></h6>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
-		var adsbygoogle = window.adsbygoogle || [];
-		adsbygoogle.push({});
-		adsbygoogle.push({});
-		adsbygoogle.push({});
-	</script>
-<div class="o"></div>
-</body>
+    AOS.init();
+</script>
+<script type="text/javascript">
+        var copyConfig = {
+            text: "SKOPIOWANO!",
+            time: 5,
+            url: "moongames.pl",
+            classAdd: "SKOPIOWANO",
+        };
+        var copyIp = document.querySelector(".copy-ip");
+        if(copyIp != null) {
+            copyIp.addEventListener("click", (e) => {
+                var lastText = copyIp.innerText;
+                copyIp.innerText = "SKOPIOWANO!";
+                copyIp.classList.add(copyConfig.classAdd);
+                var el = document.createElement("textarea");
+                el.value = copyConfig.url;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand("copy");
+                document.body.removeChild(el);
+                setTimeout(() => {
+                    copyIp.innerText = lastText;
+                    copyIp.classList.remove(copyConfig.classAdd);
+                }, copyConfig.time * 1000);
+            });
+        }
+    </script>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'66f576d3ffd8fcb1',m:'b0a7384d94688690d096cc9bc08eee630502a380-1626378043-1800-AchutmsaKWDqqDC58VwhaK+e60hhCBpGDf7uHyMqk6WwilzQEoCWPK9D5r59uI9NCA9vo2yjkzfaYAbLQYKVINA9HwOYoBcGbOv9QjFINxD2/R6DTia/7S3+9iVP+fpwQA==',s:[0x47d133eae8,0x0f7a6864db],}})();</script></body>
 </html>

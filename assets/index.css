@@ -1,8 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root{
-    --main-color: rgb(41, 41, 41);
+    --main-color: #ffffff;
+    --background-color: #181818;
+    --surface-color: #232323;
+    --border-color: #333333;
+    --button-color: #232323;
+    --button-text: #ffffff;
+    --placeholder-color: rgba(255, 255, 255, 0.75);
+    --shadow-color: rgba(255, 255, 255, 0.08);
     --error-color: rgb(206, 29, 29);
+}
+
+body.light-theme{
+    --main-color: #222222;
+    --background-color: #ffffff;
+    --surface-color: #f6f6f6;
+    --border-color: #dddddd;
+    --button-color: #ffffff;
+    --button-text: #222222;
+    --placeholder-color: rgba(0, 0, 0, 0.5);
+    --shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+body.dark-theme{
+    --main-color: #ffffff;
+    --background-color: #181818;
+    --surface-color: #232323;
+    --border-color: #333333;
+    --button-color: #232323;
+    --button-text: #ffffff;
+    --placeholder-color: rgba(255, 255, 255, 0.75);
+    --shadow-color: rgba(255, 255, 255, 0.08);
 }
 
 /**Styling**/
@@ -71,6 +100,8 @@
 
 html{
     scroll-behavior: smooth;
+    background: var(--background-color);
+    color: var(--main-color);
 }
 
 .top_holder{
@@ -125,7 +156,7 @@ input::-webkit-inner-spin-button {
     margin-top: -5px;
     margin-bottom: 30px;
     max-height: 45px;
-    border: 2px solid rgb(138, 138, 138);
+    border: 2px solid var(--border-color);
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -136,6 +167,7 @@ input::-webkit-inner-spin-button {
     -ms-user-select: none;
     user-select: none;
     transition: 200ms;
+    background: var(--surface-color);
 }
 
 .selected_grid{
@@ -234,17 +266,18 @@ input::-webkit-inner-spin-button {
     width: 100%;
     text-align: center;
     border-radius: 10px;
-    border: 2px solid rgb(138, 138, 138);
+    border: 2px solid var(--border-color);
     font-weight: bold;
     text-align: center;
     font-size: 15px;
-    color: rgb(138, 138, 138);
+    color: var(--main-color);
+    background: var(--surface-color);
 }
 
 .date_input::placeholder{
     font-weight: bold;
     text-align: center;
-    color: rgb(138, 138, 138);
+    color: var(--placeholder-color);
 }
 
 .arrow{
@@ -267,8 +300,9 @@ input::-webkit-inner-spin-button {
     margin-right: auto;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 0px 20px rgb(153, 153, 153);
+    box-shadow: 0px 0px 20px var(--shadow-color);
     transition: 200ms;
+    background: var(--surface-color);
 }
 
 .guide_holder:hover{
@@ -326,14 +360,15 @@ input::-webkit-inner-spin-button {
 }
 
 body{
-    background-color: white;
+    background-color: var(--background-color);
+    color: var(--main-color);
 }
 
 .go{
     width: 90%;
-    box-shadow: 0px 0px 20px rgb(153, 153, 153);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.08);
     height: 50px;
-    background-color: white;
+    background-color: #232323;
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
@@ -346,6 +381,7 @@ body{
     margin-bottom: 20px;
     text-align: center;
     line-height: 50px;
+    color: #ffffff;
 }
 
 .go:hover{
@@ -389,11 +425,15 @@ input:focus{
     margin-right: auto;
     margin-bottom: 40px;
     position: relative;
+    background-color: var(--surface-color);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .placeholder{
-    color: var(--main-color);
-    opacity: 0.5;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
     font-size: 15px;
     font-weight: bold;
     position: absolute;
@@ -409,14 +449,15 @@ input:focus{
 
 .input{
     border: none;
-    border-bottom: 2px solid var(--main-color);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     width: 100%;
     outline: none;
     font-weight: bold;
     height: 50px;
     font-size: 17px;
     transition: 200ms;
-    color: var(--main-color);
+    color: #ffffff;
+    background: transparent;
 }
 
 .input:focus ~ .placeholder{
@@ -470,7 +511,7 @@ input:focus{
 }
 
 .upload{
-    box-shadow: 0px 0px 20px rgb(153, 153, 153);
+    box-shadow: 0px 0px 20px var(--shadow-color);
     height: 200px;
     width: 90%;
     margin-left: auto;
@@ -481,6 +522,8 @@ input:focus{
     position: relative;
     cursor: pointer;
     transition: 200ms;
+    background: var(--surface-color);
+    border: 2px solid var(--border-color);
 }
 
 .upload_uploading{
@@ -502,6 +545,22 @@ input:focus{
     margin-top: auto;
     margin-bottom: auto;
     color: var(--main-color);
+}
+.theme-toggle{
+    width: 90px;
+    display: block;
+    margin: 10px auto;
+    padding: 8px 12px;
+    border: 2px solid var(--border-color);
+    background: var(--button-color);
+    color: var(--button-text);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 200ms;
+    font-weight: 700;
+}
+.theme-toggle:hover{
+    opacity: 0.8;
 }
 
 .upload_image{

@@ -194,35 +194,15 @@ async function loadImage() {
 
   console.log(params.get("image"));
   if (params.get("image")) {
-    fetch(params.get("image"))
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.blob();
-      })
-      .then((result) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(result);
-        reader.onload = (event) => {
-          var base = event.target.result;
+    // Bezpośrednio ustaw URL jako background, bez fetch (unika CORS)
+    setImage(params.get("image"));
 
-          if (base !== image) {
-            setImage(base);
-
-            var data = {
-              data: "image",
-              image: base,
-            };
-
-            saveData(db, data);
-          }
-        };
-      })
-      .catch((error) => {
-        console.error('Error loading image:', error);
-        // Optionally set a default image or show error
-      });
+    // Zapisz w DB dla przyszłego użycia
+    var data = {
+      data: "image",
+      image: params.get("image"),
+    };
+    saveData(db, data);
   }
 }
 

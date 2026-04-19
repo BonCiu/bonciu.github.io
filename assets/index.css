@@ -547,20 +547,49 @@ input:focus{
     color: var(--main-color);
 }
 .theme-toggle{
-    width: 90px;
-    display: block;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 10px auto;
-    padding: 8px 12px;
+    padding: 0 8px;
     border: 2px solid var(--border-color);
     background: var(--button-color);
     color: var(--button-text);
     border-radius: 999px;
     cursor: pointer;
-    transition: 200ms;
+    transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
     font-weight: 700;
+    position: relative;
+    overflow: hidden;
 }
 .theme-toggle:hover{
-    opacity: 0.8;
+    opacity: 0.95;
+}
+.theme-toggle::before{
+    content: '🌙';
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    transition: transform 250ms ease, background 250ms ease;
+}
+body.light-theme .theme-toggle::before{
+    content: '☀️';
+    transform: translateX(80px);
+}
+.theme-toggle .theme-label{
+    margin-left: auto;
+    margin-right: 6px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
 }
 
 .upload_image{

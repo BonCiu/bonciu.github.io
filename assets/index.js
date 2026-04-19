@@ -12,6 +12,8 @@ var themeLabel = document.querySelector(".theme-label");
 var currentTheme = localStorage.getItem("theme") || "dark";
 
 function applyTheme(theme) {
+  document.documentElement.classList.toggle("light-theme", theme === "light");
+  document.documentElement.classList.toggle("dark-theme", theme === "dark");
   document.body.classList.toggle("light-theme", theme === "light");
   document.body.classList.toggle("dark-theme", theme === "dark");
   if (themeLabel) {
@@ -135,30 +137,6 @@ document.querySelector(".go").addEventListener("click", () => {
     }
   });
 
-  if (empty.length != 0) {
-    empty[0].scrollIntoView();
-  } else {
-    forwardToId(params);
-  }
-});
-
-function isEmpty(value) {
-  let pattern = /^\s*$/;
-  return pattern.test(value);
-}
-
-function forwardToId(params) {
-  location.href = "/id?" + params;
-}
-
-var guide = document.querySelector(".guide_holder");
-guide.addEventListener("click", () => {
-  if (guide.classList.contains("unfolded")) {
-    guide.classList.remove("unfolded");
-  } else {
-    guide.classList.add("unfolded");
-  }
-});
   if (empty.length != 0) {
     empty[0].scrollIntoView();
   } else {

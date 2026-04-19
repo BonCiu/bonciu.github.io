@@ -193,31 +193,37 @@ async function loadImage() {
   }
 
   console.log(params.get("image"));
-  fetch(params.get("image"), {
-    method: "GET",
-    headers: {
-      Authorization: "Client-ID e4d98a899c8c946",
-    },
-  })
-    .then((response) => response.blob())
-    .then((result) => {
-      var reader = new FileReader();
-      reader.readAsDataURL(result);
-      reader.onload = (event) => {
-        var base = event.target.result;
-
-        if (base !== image) {
-          setImage(base);
-
-          var data = {
-            data: "image",
-            image: base,
-          };
-
-          saveData(db, data);
+  if (params.get("image")) {
+    fetch(params.get("image"))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-      };
-    });
+        return response.blob();
+      })
+      .then((result) => {
+        var reader = new FileReader();
+        reader.readAsDataURL(result);
+        reader.onload = (event) => {
+          var base = event.target.result;
+
+          if (base !== image) {
+            setImage(base);
+
+            var data = {
+              data: "image",
+              image: base,
+            };
+
+            saveData(db, data);
+          }
+        };
+      })
+      .catch((error) => {
+        console.error('Error loading image:', error);
+        // Optionally set a default image or show error
+      });
+  }
 }
 
 function setImage(image) {

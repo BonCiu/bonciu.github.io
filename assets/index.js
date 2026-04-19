@@ -7,6 +7,24 @@ selector.addEventListener("click", () => {
   }
 });
 
+var themeToggle = document.querySelector(".theme-toggle");
+var currentTheme = localStorage.getItem("theme") || "dark";
+
+function applyTheme(theme) {
+  document.body.classList.toggle("light-theme", theme === "light");
+  document.body.classList.toggle("dark-theme", theme === "dark");
+  themeToggle.innerText = theme === "dark" ? "Jasny tryb" : "Ciemny tryb";
+  localStorage.setItem("theme", theme);
+  currentTheme = theme;
+}
+
+if (themeToggle) {
+  applyTheme(currentTheme);
+  themeToggle.addEventListener("click", () => {
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  });
+}
+
 document.querySelectorAll(".date_input").forEach((element) => {
   element.addEventListener("click", () => {
     document.querySelector(".date").classList.remove("error_shown");

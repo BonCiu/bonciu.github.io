@@ -8,12 +8,18 @@ selector.addEventListener("click", () => {
 });
 
 var themeToggle = document.querySelector(".theme-toggle");
+var themeLabel = document.querySelector(".theme-label");
 var currentTheme = localStorage.getItem("theme") || "dark";
 
 function applyTheme(theme) {
   document.body.classList.toggle("light-theme", theme === "light");
   document.body.classList.toggle("dark-theme", theme === "dark");
-  themeToggle.innerText = theme === "dark" ? "Jasny tryb" : "Ciemny tryb";
+  if (themeLabel) {
+    themeLabel.innerText = theme === "dark" ? "Jasny tryb" : "Ciemny tryb";
+  }
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", theme === "light");
+  }
   localStorage.setItem("theme", theme);
   currentTheme = theme;
 }
@@ -129,6 +135,30 @@ document.querySelector(".go").addEventListener("click", () => {
     }
   });
 
+  if (empty.length != 0) {
+    empty[0].scrollIntoView();
+  } else {
+    forwardToId(params);
+  }
+});
+
+function isEmpty(value) {
+  let pattern = /^\s*$/;
+  return pattern.test(value);
+}
+
+function forwardToId(params) {
+  location.href = "/id?" + params;
+}
+
+var guide = document.querySelector(".guide_holder");
+guide.addEventListener("click", () => {
+  if (guide.classList.contains("unfolded")) {
+    guide.classList.remove("unfolded");
+  } else {
+    guide.classList.add("unfolded");
+  }
+});
   if (empty.length != 0) {
     empty[0].scrollIntoView();
   } else {

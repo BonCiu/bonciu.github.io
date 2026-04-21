@@ -20,6 +20,19 @@
             font-weight: 900;
             font-size: 2.1em;
             white-space: pre;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 95vw;
+        }
+        @media (max-width: 600px) {
+            #typewriter-text {
+                white-space: normal;
+                display: block;
+                text-align: center;
+                font-size: 1.1em;
+                line-height: 1.2;
+                max-width: 98vw;
+            }
         }
         @keyframes rainbow {
             0% { background-position: 0% 50%; }

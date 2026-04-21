@@ -4,19 +4,105 @@
     <link rel="icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4=w240-h480-rw">
     <title style="color: #00FFD0;">FAKE MOBYWATEL BY MLODY G</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
+    <style>
+        body {
+            cursor: url('assets/images/buch.cur'), auto;
+        }
+        #typewriter-text {
+            display: inline-block;
+            background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet, red);
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 4s linear infinite;
+            font-weight: 900;
+            font-size: 2.1em;
+            white-space: pre;
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        
+        .input_holder:hover,
+        .input_holder:focus-within {
+            box-shadow: 0 0 8px 2px #51ff00, 0 0 0 4px #ffff1c33;
+        }
+        .upload {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+            border-radius: 16px;
+            overflow: visible;
+        }
+        .upload::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            border-radius: 18px;
+            padding: 0;
+            z-index: -1;
+            background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet, red);
+            background-size: 400% 100%;
+            opacity: 0;
+            transition: opacity 0.25s;
+            animation: rainbow-border 3s linear infinite;
+        }
+        .upload:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 8px 32px 0 #00c3ff44, 0 2px 12px 0 #ffff1c33;
+            z-index: 2;
+        }
+        .upload:hover::before {
+            opacity: 1;
+        }
+        @keyframes rainbow-border {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+    </style>
 </head>
 <body>
     <div class="top-right-buttons">
         <a href="https://guns.lol/bonciu" class="contact-btn" target="_blank" rel="noopener">Kontakt</a>
     </div>
     <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
-    <p class="logo_text">FAKE MOBYWATEL BY MLODY G</p>
+        <p class="logo_text" id="typewriter-text"></p>
     <button class="theme-toggle">
+                <script>
+                    // tekst na srodku app ===
+                    const text = "FAKE MOBYWATEL BY MLODY G AKA OBYWATEL BEZ NIPU";
+                    const el = document.getElementById("typewriter-text");
+                    let i = 0;
+                    function typeWriter() {
+                        if (i < text.length) {
+                            el.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 180);
+                        }
+                    }
+                    window.addEventListener('DOMContentLoaded', typeWriter);
+
+                    // tekst na karcie strony ====
+                    const titleText = "FAKE MOBYWATEL BY MLODY G";
+                    let titleIndex = 0;
+                    function typeWriterTitle() {
+                        if (titleIndex <= titleText.length) {
+                            document.title = titleText.substring(0, titleIndex);
+                            titleIndex++;
+                            setTimeout(typeWriterTitle, 220);
+                        }
+                    }
+                    window.addEventListener('DOMContentLoaded', typeWriterTitle);
+                </script>
         <span class="theme-icon"></span>
         <span class="theme-label">Jasny tryb</span>
     </button>
 
-    <p class="warning">Kmicic to cwel i komusze dzieciątko - applikacja w fazie testowej instrukcja obslugi app znajduje sie na dole *klik*</p>
+    <p class="warning">aplikacja w fazie testowej, instrukcja obslugi znajduje sie na dole *klik* a tak w ogóle to karol rodak to cwel</p>
 
     <div class="guide_holder">
         <div class="top_holder">
@@ -24,17 +110,23 @@
             <img class="arrow" src="./assets/images/arrow.png">
         </div>
         <div class="guide_text">
-            <span style="font-size: 17px; font-weight: 500; color: blue;">IOS:</span><br>
+            <span style="font-size: 17px; font-weight: 500; color: blue;"><b>IOS:</b></span><br>
             <ul>
-                <li>⮚ Upewnij się, że używasz przeglądarki Safari</li>
-                <li>⮚ Uzupełnij dane i kliknij wejdź kliknij trzy kropki w prawym dolnym rogu</li>
-                <li>⮚ Naciśnij udostępnij -> Do Ekranu głównego</li>
+                <li>⮚ Na IPhone: Upewnij się, że używasz przeglądarki Safari</li>
+                <li>⮚ Uzupełnij swoje dane i kliknij wejdź</li>
+                <li>⮚ W ekranie logowania kliknij trzy kropki lub przycisk "Udostępnij"</li>
+                <li>⮚ lub przycisk "Udostępnij" następnie -> Do Ekranu głównego</li>
+                <br>
+                <li>⮚ Na ekranie znajduje się teraz ikona aplikacji <b>mObywatel</b> po kliknięciu nie musisz wpisywac hasla, powodzenia!</li>
             </ul>
-            <span style="font-size: 17px; font-weight: 500; color: green;">Android:</span>
+            <span style="font-size: 17px; font-weight: 500; color: green;"><b>Android:</b></span>
             <ul>
                 <li>⮚ Upewnij się, że używasz przeglądarki google lub chrome</li>
                 <li>⮚ Uzupełnij dane i kliknij wejdź</li>
-                <li>⮚ Naciśnij 3 kropki -> Dodaj do ekranu głównego</li>
+                <li>⮚ Naciśnij 3 kropki -> Dodaj do ekranu głównego lub</li>
+                <li>⮚ przycisk "Udostępnij" następnie -> Do Ekranu głównego</li>
+                <br>
+                <li>⮚ Na ekranie znajduje się teraz ikona aplikacji <b>mObywatel</b> po kliknięciu nie musisz wpisywac hasla, powodzenia!</li>
             </ul>
         </div>
     </div>
@@ -52,13 +144,13 @@
     <div class="input_holder">
         <input type="text" id="name" class="input" placeholder="">
         <span class="placeholder">Imię (imiona)</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
  
     <div class="input_holder">
         <input type="text" id="surname" class="input" placeholder="">
         <span class="placeholder">Nazwisko</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <p class="top_info">Płeć</p>
@@ -86,35 +178,35 @@
             <input class="date_input" id="month" placeholder="MM" type="number">
     
             </input>
-            <input class="date_input" id="year" placeholder="YYYY" type="number">
+            <input class="date_input" id="year" placeholder="RRRR" type="number">
     
             </input>
         </div>
-        <p class="error">Wprowadź prawidłową datę</p>
+        <p class="error">wprowadź prawidłową datę!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="nationality" class="input" placeholder="">
         <span class="placeholder">Obywatelstwo</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="familyName" class="input" placeholder="">
         <span class="placeholder">Nazwisko rodowe</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="fathersFamilyName" class="input" placeholder="">
         <span class="placeholder">Nazwisko rodowe ojca</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="mothersFamilyName" class="input" placeholder="">
         <span class="placeholder">Nazwisko rodowe matki</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <p class="subtext">Miejsce zamieszkania</p>
@@ -122,35 +214,135 @@
     <div class="input_holder">
         <input type="text" id="birthPlace" class="input" placeholder="">
         <span class="placeholder">Miejsce urodzenia</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="countryOfBirth" class="input" placeholder="">
         <span class="placeholder">Kraj urodzenia</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="address1" class="input" placeholder="">
         <span class="placeholder">Ulica i numer domu</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="address2" class="input" placeholder="">
         <span class="placeholder">Kod pocztowy</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <div class="input_holder">
         <input type="text" id="city" class="input" placeholder="">
         <span class="placeholder">Miasto</span>
-        <p class="error">To pole jest wymagane</p>
+        <p class="error">to pole jest wymagane!</p>
     </div>
 
     <a class="go">wejdź</a>
     <script src="assets/index.js"></script>
     <script src="assets/manifest.js"></script>
-    <footer>Młody G - 2026 &copy;</footer>
+    <footer class="custom-footer">
+        <div class="footer-content">
+            <span class="footer-main" id="footer-typewriter"></span>
+            <nav class="footer-nav">
+                <a href="https://guns.lol/bonciu" target="_blank" rel="noopener">Kontakt</a>
+                <a href="#" id="footer-guide-link">Instrukcja obsługi aplikacji</a>
+            </nav>
+        </div>
+    </footer>
+    <script>
+        // Footer guide link scroll and open
+        document.addEventListener('DOMContentLoaded', function() {
+            var guideLink = document.getElementById('footer-guide-link');
+            var guideHolder = document.querySelector('.guide_holder');
+            var arrow = document.querySelector('.guide_holder .arrow');
+            if (guideLink && guideHolder && arrow) {
+                guideLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Scroll to guide
+                    guideHolder.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Simulate click on arrow to open/collapse if such logic exists
+                    if (typeof arrow.onclick === 'function') {
+                        arrow.onclick();
+                    } else {
+                        arrow.click();
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        // Typewriter effect for the footer (looped)
+        const footerText = "Młody G © 2026";
+        const footerEl = document.getElementById("footer-typewriter");
+        let footerI = 0;
+        let footerDeleting = false;
+        function typeWriterFooter() {
+            if (!footerDeleting && footerI <= footerText.length) {
+                footerEl.textContent = footerText.substring(0, footerI);
+                footerI++;
+                if (footerI > footerText.length) {
+                    footerDeleting = true;
+                    setTimeout(typeWriterFooter, 1200); 
+                } else {
+                    setTimeout(typeWriterFooter, 120);
+                }
+            } else if (footerDeleting && footerI >= 0) {
+                footerEl.textContent = footerText.substring(0, footerI);
+                footerI--;
+                if (footerI < 0) {
+                    footerDeleting = false;
+                    setTimeout(typeWriterFooter, 400); 
+                } else {
+                    setTimeout(typeWriterFooter, 60);
+                }
+            }
+        }
+        window.addEventListener('DOMContentLoaded', typeWriterFooter);
+    </script>
+    <style>
+        .custom-footer {
+            width: 100%;
+            background: transparent;
+            padding: 24px 0 12px 0;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            color: #fff;
+            font-family: inherit;
+            margin-top: 40px;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-main {
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .footer-nav {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-nav a {
+            color: #b3e0ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 4px 14px;
+            border-radius: 18px;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+        .footer-nav a:hover {
+            background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
+            color: #232526;
+            box-shadow: 0 2px 12px 0 #00c3ff44;
+        }
+    </style>
 </body>

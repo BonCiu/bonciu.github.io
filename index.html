@@ -267,7 +267,6 @@
         </div>
     </footer>
     <script>
-        // Footer guide link scroll and open
         document.addEventListener('DOMContentLoaded', function() {
             var guideLink = document.getElementById('footer-guide-link');
             var guideHolder = document.querySelector('.guide_holder');
@@ -275,9 +274,7 @@
             if (guideLink && guideHolder && arrow) {
                 guideLink.addEventListener('click', function(e) {
                     e.preventDefault();
-                    // Scroll to guide
                     guideHolder.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    // Simulate click on arrow to open/collapse if such logic exists
                     if (typeof arrow.onclick === 'function') {
                         arrow.onclick();
                     } else {
@@ -288,7 +285,7 @@
         });
     </script>
     <script>
-        // Typewriter effect for the footer (looped)
+        // efekt tzw. "typewritter"
         const footerText = "Młody G © 2026";
         const footerEl = document.getElementById("footer-typewriter");
         let footerI = 0;

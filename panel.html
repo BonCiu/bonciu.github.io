@@ -1,8 +1,26 @@
 <head>
+    <script>
+        let lastScrollY = window.scrollY;
+        let barHidden = false;
+        window.addEventListener('DOMContentLoaded', function() {
+            const topBar = document.querySelector('.top-bar-buttons');
+            window.addEventListener('scroll', function() {
+                if (!topBar) return;
+                if (window.scrollY > 30 && window.scrollY > lastScrollY && !barHidden) {
+                    topBar.classList.add('top-bar-hide');
+                    barHidden = true;
+                } else if ((window.scrollY < lastScrollY || window.scrollY <= 0) && barHidden) {
+                    topBar.classList.remove('top-bar-hide');
+                    barHidden = false;
+                }
+                lastScrollY = window.scrollY;
+            });
+        });
+    </script>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/index.css">
     <link rel="icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4=w240-h480-rw">
-    <title>FAKE MOBYWATEL BY MLODY G</title>
+    <title style="color: #00FFD0;">FAKE MOBYWATEL BY MLODY G</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
     <style>
         body {
@@ -79,7 +97,10 @@
     </style>
 </head>
 <body>
-    <div class="top-right-buttons">
+    <div class="top-bar-buttons">
+        <a href="index.html" class="back-home-btn">
+            <span class="back-arrow">&#8592;</span> Strona główna
+        </a>
         <a href="https://guns.lol/bonciu" class="contact-btn" target="_blank" rel="noopener">Kontakt</a>
     </div>
     <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
@@ -285,7 +306,6 @@
         });
     </script>
     <script>
-        // efekt tzw. "typewritter"
         const footerText = "Młody G © 2026";
         const footerEl = document.getElementById("footer-typewriter");
         let footerI = 0;
@@ -316,14 +336,15 @@
     <style>
         .custom-footer {
             width: 100%;
-            background: transparent;
+            background: var(--surface-color, #232323);
             padding: 24px 0 12px 0;
             position: relative;
             bottom: 0;
             left: 0;
-            color: #fff;
+            color: var(--main-color, #fff);
             font-family: inherit;
             margin-top: 40px;
+            box-shadow: 0 0 16px 0 rgba(0,0,0,0.10);
         }
         .footer-content {
             display: flex;
@@ -335,24 +356,62 @@
             font-size: 1.2em;
             font-weight: 700;
             letter-spacing: 1px;
+            color: var(--main-color, #181818);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.08);
         }
         .footer-nav {
             display: flex;
             gap: 24px;
         }
         .footer-nav a {
-            color: #b3e0ff;
+            color: var(--button-text, #181818);
+            background: var(--button-color, #fff);
             text-decoration: none;
             font-weight: 500;
             font-size: 1em;
             padding: 4px 14px;
             border-radius: 18px;
             transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px 0 var(--shadow-color, rgba(0,0,0,0.08));
         }
         .footer-nav a:hover {
             background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
             color: #232526;
             box-shadow: 0 2px 12px 0 #00c3ff44;
+        }
+        body.light-theme .custom-footer {
+            background: #f6f6f6;
+            color: #181818;
+        }
+        body.light-theme .footer-main {
+            color: #181818;
+            text-shadow: 0 1px 2px #fff;
+        }
+        body.light-theme .footer-nav a {
+            color: #181818;
+            background: #fff;
+            box-shadow: 0 2px 8px 0 #0001;
+        }
+        body.light-theme .footer-nav a:hover {
+            background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
+            color: #232526;
+        }
+        body.dark-theme .custom-footer {
+            background: #232323;
+            color: #fff;
+        }
+        body.dark-theme .footer-main {
+            color: #fff;
+            text-shadow: 0 1px 2px #000;
+        }
+        body.dark-theme .footer-nav a {
+            color: #fff;
+            background: #232323;
+            box-shadow: 0 2px 8px 0 #fff1;
+        }
+        body.dark-theme .footer-nav a:hover {
+            background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
+            color: #232526;
         }
     </style>
 </body>

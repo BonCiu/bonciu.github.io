@@ -1,3 +1,94 @@
+body.light-theme .top-bar-buttons {
+    background: #fff;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+}
+body.light-theme .input {
+    background: #fff;
+    color: #181818;
+    border-bottom: 2px solid #bbb;
+}
+body.light-theme .input::placeholder {
+    color: #444;
+    opacity: 1;
+}
+body.light-theme .date_input {
+    background: #fff;
+    color: #181818;
+    border: 2px solid #bbb;
+}
+body.light-theme .date_input::placeholder {
+    color: #444;
+    opacity: 1;
+}
+body.light-theme .placeholder {
+    color: #444;
+    opacity: 1;
+}
+/* --- Back to home button --- */
+.top-bar-buttons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 101;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: rgba(24, 24, 24, 0.97);
+    padding: 14px 0 10px 32px;
+    transition: transform 0.38s cubic-bezier(.4,2,.6,1), opacity 0.3s, box-shadow 0.3s, background 0.3s;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+    will-change: transform, opacity;
+}
+.top-bar-hide {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: none;
+}
+.back-home-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px 0 18px;
+    height: 44px;
+    background: linear-gradient(90deg, #0d93ec 0%, #00ffd0 100%);
+    color: #181818;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 24px 0 rgba(0,255,208,0.10);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.18s;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    gap: 8px;
+}
+.back-home-btn:hover, .back-home-btn:focus {
+    background: linear-gradient(90deg, #00ffd0 0%, #0d93ec 100%);
+    color: #fff;
+    box-shadow: 0 8px 32px 0 rgba(13,147,236,0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+.back-home-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px 0 rgba(0,255,208,0.10);
+}
+.back-arrow {
+    font-size: 1.3em;
+    margin-right: 6px;
+    color: #0d93ec;
+    font-weight: bold;
+    transition: color 0.25s;
+}
+.back-home-btn:hover .back-arrow {
+    color: #00ffd0;
+}
+/* --- Top right contact button --- */
 .top-right-buttons {
     position: fixed;
     top: 28px;
@@ -73,7 +164,6 @@ body.dark-theme, html.dark-theme{
     --placeholder-color: rgba(255, 255, 255, 0.75);
     --shadow-color: rgba(255, 255, 255, 0.08);
 }
-
 /**Styling**/
 
 .warning{
@@ -620,7 +710,12 @@ input:focus{
     font-size: 14px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     transition: transform 250ms ease, background 250ms ease, color 250ms ease;
+    transform: translateX(0);
 }
+body.light-theme .theme-toggle{
+    flex-direction: row-reverse;
+}
+
 body.light-theme .theme-toggle .theme-icon{
     background: #fcd34d;
     color: #ffffff;
@@ -709,5 +804,8 @@ body.light-theme .theme-toggle .theme-icon{
     100%{
         rotate: 360deg;
     }
+
+}
+
 
 }

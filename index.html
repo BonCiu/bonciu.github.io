@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
+	<title>Strona główna - mObywatel</title>
+	<link rel="stylesheet" href="assets/index.css">
+	<link rel="icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4=w240-h480-rw">
+	<style>
+		body {
+			cursor: url('assets/images/buch.cur'), auto;
+			min-height: 100vh;
+			background: var(--background-color);
+			color: var(--main-color);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		.main-container {
+			max-width: 480px;
+			background: var(--surface-color);
+			border-radius: 24px;
+			box-shadow: 0 8px 32px 0 #00c3ff44, 0 2px 12px 0 #ffff1c33;
+			padding: 40px 28px 32px 28px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			animation: fadeIn 1.2s cubic-bezier(.4,2,.6,1);
+		}
+		@keyframes fadeIn {
+			from { opacity: 0; transform: translateY(40px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+		.main-logo {
+			width: 110px;
+			border-radius: 16px;
+			margin-bottom: 18px;
+			box-shadow: 0 4px 24px 0 #00c3ff44;
+			transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+		}
+		.main-logo:hover {
+			transform: scale(1.08) rotate(-6deg);
+		}
+		.main-title {
+			font-size: 2.1em;
+			font-weight: 900;
+			background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet, red);
+			background-size: 400% 100%;
+			background-clip: text;
+			-webkit-background-clip: text;
+			color: transparent;
+			-webkit-text-fill-color: transparent;
+			animation: rainbow 4s linear infinite;
+			margin-bottom: 12px;
+			text-align: center;
+		}
+		@keyframes rainbow {
+			0% { background-position: 0% 50%; }
+			100% { background-position: 100% 50%; }
+		}
+		.main-desc {
+			font-size: 1.1em;
+			color: var(--placeholder-color);
+			margin-bottom: 32px;
+			text-align: center;
+		}
+		.go-mobywatel {
+			display: inline-block;
+			padding: 16px 44px;
+			font-size: 1.2em;
+			font-weight: 700;
+			color: #181818;
+			background: linear-gradient(90deg, #00ffd0 0%, #0d93ec 100%);
+			border: none;
+			border-radius: 999px;
+			box-shadow: 0 4px 24px 0 rgba(0,255,208,0.10);
+			cursor: pointer;
+			letter-spacing: 0.04em;
+			text-decoration: none;
+			transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.18s;
+			outline: none;
+			position: relative;
+			overflow: hidden;
+		}
+		.go-mobywatel:hover, .go-mobywatel:focus {
+			background: linear-gradient(90deg, #0d93ec 0%, #00ffd0 100%);
+			color: #fff;
+			box-shadow: 0 8px 32px 0 rgba(13,147,236,0.18);
+			transform: translateY(-2px) scale(1.04);
+		}
+		.go-mobywatel:active {
+			transform: scale(0.98);
+			box-shadow: 0 2px 8px 0 rgba(0,255,208,0.10);
+		}
+		.main-footer {
+			margin-top: 48px;
+			text-align: center;
+			color: #b3e0ff;
+			font-size: 1em;
+			opacity: 0.7;
+			letter-spacing: 1px;
+			font-weight: 500;
+		}
+		.main-footer a {
+			color: #b3e0ff;
+			text-decoration: none;
+			margin: 0 8px;
+			border-radius: 18px;
+			padding: 2px 10px;
+			transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+		}
+		.main-footer a:hover {
+			background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
+			color: #232526;
+			box-shadow: 0 2px 12px 0 #00c3ff44;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="weed-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></canvas>
+	<div class="top-right-buttons" style="z-index:2;">
+		<a href="https://guns.lol/bonciu" class="contact-btn" target="_blank" rel="noopener">Kontakt</a>
+	</div>
+	<div class="main-container" style="z-index:2; position:relative;">
+		<img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="main-logo" alt="mObywatel logo">
+		<div class="main-title" id="main-typewriter"></div>
+		<div class="main-desc">Witaj w aplikacji <b>Fake mObywatel</b>!<br>Przejdź dalej, aby korzystać z funkcji aplikacji.</div>
+		<div class="main-date" id="main-date"></div>
+		<a href="#" class="go-mobywatel" id="go-mobywatel-btn">Przejdź do aplikacji mObywatel</a>
+		<div id="captcha-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
+			<div style="background:var(--surface-color); border-radius:18px; box-shadow:0 4px 24px #00c3ff44; padding:32px 28px; min-width:280px; max-width:90vw; display:flex; flex-direction:column; align-items:center;">
+				<div style="font-size:1.1em; font-weight:600; margin-bottom:18px; color:var(--main-color);"><b>ANTYBOT</b> Captcha - Potwierdź, że nie jesteś botem.</div>
+				<div id="captcha-question" style="margin-bottom:14px; color:var(--main-color);"></div>
+				<input id="captcha-answer" type="text" style="padding:8px 16px; border-radius:8px; border:1.5px solid var(--border-color); font-size:1em; margin-bottom:10px; outline:none; background:var(--background-color); color:var(--main-color);" autocomplete="off">
+				<button id="captcha-submit" style="padding:8px 28px; border-radius:999px; background:linear-gradient(90deg,#00ffd0 0%,#0d93ec 100%); color:#181818; font-weight:700; border:none; font-size:1em; cursor:pointer; transition:background 0.2s;">Potwierdź</button>
+				<button id="captcha-close" aria-label="Zamknij" style="position:absolute; top:12px; right:14px; background:transparent; border:none; font-size:1.6em; color:var(--main-color); cursor:pointer; opacity:0.7; transition:opacity 0.2s; z-index:2;">&times;</button>
+				<div id="captcha-error" style="color:var(--error-color); font-size:0.98em; margin-top:8px; min-height:22px;"></div>
+			</div>
+		</div>
+			</div>
+		</div>
+	</div>
+	<footer class="main-footer" style="z-index:2; position:relative;">
+		<span id="footer-typewriter"></span>
+		<nav>
+			<a href="https://guns.lol/bonciu" target="_blank" rel="noopener">Kontakt</a>
+			<a href="#" id="footer-guide-link">Instrukcja obsługi aplikacji</a>
+		</nav>
+	</footer>
+	<script>
+		const weedSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><g><path fill='#2ecc40' d='M20 2c-1.5 4.5-2.5 8.5-2.5 13.5C13 13 8.5 10.5 4 8c2.5 5 5.5 9.5 10 13C8 20 4 21 0 22c5 2 10 3 15 2-3 2-6 4-8 7 4-1 8-2 12-4 4 2 8 3 12 4-2-3-5-5-8-7 5 1 10 0 15-2-4-1-8-2-14-1.5 4.5-3.5 7.5-8 10-13-4.5 2.5-9 5-13.5 7.5C22.5 10.5 21.5 6.5 20 2z'/></g></svg>`;
+		const weedImg = new window.Image();
+		weedImg.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(weedSVG);
+		const leaves = [];
+		const leafCount = 16;
+		const canvas = document.getElementById('weed-bg-canvas');
+		function resizeCanvas() {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		}
+		resizeCanvas();
+		window.addEventListener('resize', resizeCanvas);
+		for (let i = 0; i < leafCount; i++) {
+			leaves.push({
+				x: Math.random() * window.innerWidth,
+				y: Math.random() * window.innerHeight,
+				vx: (Math.random() * 2 + 1) * (Math.random() < 0.5 ? 1 : -1),
+				vy: (Math.random() * 2 + 1) * (Math.random() < 0.5 ? 1 : -1),
+				size: 32 + Math.random() * 32,
+				angle: Math.random() * Math.PI * 2,
+				spin: (Math.random() - 0.5) * 0.03
+			});
+		}
+		function animateLeaves() {
+			const ctx = canvas.getContext('2d');
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			for (const leaf of leaves) {
+				leaf.x += leaf.vx;
+				leaf.y += leaf.vy;
+				leaf.angle += leaf.spin;
+				if (leaf.x < 0) { leaf.x = 0; leaf.vx *= -1; }
+				if (leaf.x + leaf.size > canvas.width) { leaf.x = canvas.width - leaf.size; leaf.vx *= -1; }
+				if (leaf.y < 0) { leaf.y = 0; leaf.vy *= -1; }
+				if (leaf.y + leaf.size > canvas.height) { leaf.y = canvas.height - leaf.size; leaf.vy *= -1; }
+				ctx.save();
+				ctx.translate(leaf.x + leaf.size/2, leaf.y + leaf.size/2);
+				ctx.rotate(leaf.angle);
+				ctx.drawImage(weedImg, -leaf.size/2, -leaf.size/2, leaf.size, leaf.size);
+				ctx.restore();
+			}
+			requestAnimationFrame(animateLeaves);
+		}
+		weedImg.onload = animateLeaves;
+		const goBtn = document.getElementById('go-mobywatel-btn');
+		const captchaModal = document.getElementById('captcha-modal');
+		const captchaQuestion = document.getElementById('captcha-question');
+		const captchaAnswer = document.getElementById('captcha-answer');
+		const captchaSubmit = document.getElementById('captcha-submit');
+		const captchaError = document.getElementById('captcha-error');
+		let captchaResult = 0;
+		function generateCaptcha() {
+			const a = Math.floor(Math.random()*10+1);
+			const b = Math.floor(Math.random()*10+1);
+			captchaResult = a + b;
+			captchaQuestion.textContent = `Ile to jest ${a} + ${b}?`;
+			captchaAnswer.value = '';
+			captchaError.textContent = '';
+		}
+		goBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			generateCaptcha();
+			captchaModal.style.display = 'flex';
+			captchaAnswer.focus();
+		});
+		document.getElementById('captcha-close').addEventListener('click', function() {
+			captchaModal.style.display = 'none';
+		});
+		captchaSubmit.addEventListener('click', function() {
+			if (parseInt(captchaAnswer.value, 10) === captchaResult) {
+				captchaError.textContent = '';
+				captchaModal.style.display = 'none';
+				window.location.href = 'index.html';
+			} else {
+				captchaError.textContent = 'Zła odpowiedź, spróbuj ponownie.';
+				captchaAnswer.value = '';
+				captchaAnswer.focus();
+			}
+		});
+		captchaAnswer.addEventListener('keydown', function(e) {
+			if (e.key === 'Enter') captchaSubmit.click();
+		});
+		captchaModal.addEventListener('click', function(e) {
+			if (e.target === captchaModal) captchaModal.style.display = 'none';
+		});
+		// data i godzina
+		function updateDateTime() {
+			const now = new Date();
+			const date = now.toLocaleDateString('pl-PL');
+			const time = now.toLocaleTimeString('pl-PL');
+			document.getElementById('main-date').textContent = `Aktualnie mamy: ${date} ${time}`;
+		}
+		setInterval(updateDateTime, 1000);
+		updateDateTime();
+		const mainText = "FAKE MOBYWATEL BY MLODY G";
+		const mainEl = document.getElementById("main-typewriter");
+		let mainI = 0;
+		function typeWriterMain() {
+			if (mainI < mainText.length) {
+				mainEl.textContent += mainText.charAt(mainI);
+				mainI++;
+				setTimeout(typeWriterMain, 80);
+			}
+		}
+		window.addEventListener('DOMContentLoaded', typeWriterMain);
+
+		const footerText = "Młody G © 2026";
+		const footerEl = document.getElementById("footer-typewriter");
+		let footerI = 0;
+		let footerDeleting = false;
+		function typeWriterFooter() {
+			if (!footerDeleting && footerI <= footerText.length) {
+				footerEl.textContent = footerText.substring(0, footerI);
+				footerI++;
+				if (footerI > footerText.length) {
+					footerDeleting = true;
+					setTimeout(typeWriterFooter, 1200); 
+				} else {
+					setTimeout(typeWriterFooter, 120);
+				}
+			} else if (footerDeleting && footerI >= 0) {
+				footerEl.textContent = footerText.substring(0, footerI);
+				footerI--;
+				if (footerI < 0) {
+					footerDeleting = false;
+					setTimeout(typeWriterFooter, 400); 
+				} else {
+					setTimeout(typeWriterFooter, 60);
+				}
+			}
+		}
+		window.addEventListener('DOMContentLoaded', typeWriterFooter);
+	</script>
+</body>
+</html>

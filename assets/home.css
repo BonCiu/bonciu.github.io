@@ -5,6 +5,27 @@
   margin-top: 15px;
 }
 
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1f2125;
+}
+
+.main_button {
+  background-color: transparent !important;
+  color: #1566d4 !important;
+  border: none !important;
+  font-size: 16px !important;
+  font-weight: normal !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main_button:hover {
+  background-color: transparent !important;
+  text-decoration: underline;
+}
+
 .top_image {
   width: 35px;
 }
@@ -17,7 +38,9 @@
 .card_grid {
   width: 100%;
   display: grid;
-  grid-template-columns: 50% 25% 25%;
+  grid-template-columns: 1fr auto auto;
+  grid-gap: 15px;
+  align-items: center;
 }
 
 .card_grid .main_button {
@@ -38,14 +61,15 @@
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  height: 220px;
+  height: 320px;
   width: 100%;
-  max-width: 430px;
+  max-width: 500px;
   background-color: #0f4fcc;
   background-image: url("images/tlomobywatel.png");
   background-size: 120%;
   background-position: top right;
   background-repeat: no-repeat;
+  margin: 30px auto;
 }
 
 .card_label {
@@ -122,4 +146,3 @@
   margin-right: auto;
   opacity: 0.5;
 }
-

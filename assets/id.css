@@ -207,3 +207,22 @@
     width: max-content;
     margin-left: auto;
 }
+
+.update_notification {
+    width: 97%;
+    background: linear-gradient(90deg, #e8f4ff 0%, #f0e8ff 100%);
+    border: 1px solid #c0d9f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 16px auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.update_text {
+    font-size: 14px;
+    color: #0055cc;
+    margin: 0;
+    font-weight: 500;
+    text-align: center;
+}

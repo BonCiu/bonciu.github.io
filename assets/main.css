@@ -314,10 +314,11 @@ img {
 
 .bottom_bar_grid {
   display: grid;
-  grid-template-columns: repeat(5, calc(100% / 5));
+  grid-template-columns: repeat(4, 1fr);
   height: 100%;
   margin-top: 4px;
   width: 100%;
+  gap: 0;
 }
 
 .bottom_bar {

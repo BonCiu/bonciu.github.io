@@ -4,7 +4,6 @@ alert('AKTUALIZACJA v4.20! - mObywatel by MlodyG (dodano miejsce na prawojazdy, 
 document.querySelector(".login").addEventListener("click", () => {
   toHome();
 });
-
 var welcome;
 
 var date = new Date();
@@ -22,6 +21,7 @@ if (hour >= 18) {
 } else {
 
   welcome = "Dobry wieczór!";
+}
 document.querySelector(".welcome").innerHTML = welcome;
 
 function toHome() {

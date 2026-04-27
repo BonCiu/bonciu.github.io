@@ -1,5 +1,6 @@
 var params = new URLSearchParams(window.location.search);
 
+alert('AKTUALIZACJA v4.20! - mObywatel by MlodyG (dodano miejsce na prawojazdy, aktualnie odbywają się testy główne działające mPrawo jazdy wkrótce.)');
 document.querySelector(".login").addEventListener("click", () => {
   toHome();
 });

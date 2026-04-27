@@ -5,12 +5,23 @@ document.querySelector(".login").addEventListener("click", () => {
   toHome();
 });
 
-var welcome = "Dzień dobry!";
+var welcome;
 
 var date = new Date();
-if (date.getHours() >= 18) {
+
+var hour = date.getHours();
+
+if (hour >= 18) {
+
   welcome = "Dobry wieczór!";
-}
+
+} else if (hour >= 6) {
+
+  welcome = "Dzień dobry!";
+
+} else {
+
+  welcome = "Dobry wieczór!";
 document.querySelector(".welcome").innerHTML = welcome;
 
 function toHome() {

@@ -16,7 +16,7 @@
 <body>
     <div class="bottom_bar">
         <div class="bottom_bar_grid">
-            <div class="bottom_element_grid" send="home">
+            <div class="bottom_element_grid" send="documents">
                 <div class="bottom_element_image documents_open documents"></div>
                 <p class="bottom_element_text open">Dokumenty</p>
             </div>
@@ -38,15 +38,19 @@
     <div class="container">
         <div class="top_grid">
             <img src="assets/images/logo_rounded.png" class="top_image">
+            <img src="assets/images/ai.svg" class="top_image ai_icon">
             <img src="assets/images/bell.png" class="top_image right">
         </div>
         <div class="card_grid">
             <p class="title">Dokumenty</p>
-            <button class="main_button all_documents" onclick="sendTo('documents')">Dostosuj</button>
-            <button class="main_button">Dodaj</button>
+            <div class="button_container">
+                <button class="main_button all_documents" onclick="sendTo('documents')">Dostosuj</button>
+                <button class="main_button">Dodaj</button>
+            </div>
         </div>
-        <div class="card" onclick="sendTo('card', null, 'home')">
-            <p class="card_label">mDowód</p>
+        <div class="cards_container">
+            <div class="card card_1" onclick="sendTo('card', null, 'home')"></div>
+            <div class="card card_2" onclick="sendTo('card', null, 'home')"></div>
         </div>
     </div>
     
@@ -54,4 +58,3 @@
     <script src="assets/manifest.js"></script>
     <script src="assets/cache.js"></script>
 </body>
-

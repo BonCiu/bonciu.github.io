@@ -1,13 +1,13 @@
 .top_grid {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr auto auto;
   width: 100%;
   margin-top: 15px;
 }
 
 .title {
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 35px;
+  font-weight: 900;
   color: #1f2125;
 }
 
@@ -30,6 +30,10 @@
   width: 35px;
 }
 
+.ai_icon {
+  margin-right: 10px;
+}
+
 .right {
   margin-right: 0;
   margin-left: auto;
@@ -37,10 +41,17 @@
 
 .card_grid {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  grid-gap: 15px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .card_grid .main_button {
@@ -56,32 +67,49 @@
   font-weight: bold;
 }
 
+.cards_container {
+  width: 100%;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
 .card {
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-  height: 320px;
   width: 100%;
   max-width: 500px;
-  background-color: #0f4fcc;
-  background-image: url("images/tlomobywatel.png");
-  background-size: 120%;
-  background-position: top right;
+  height: 320px;
+  border-radius: 28px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+  background-size: 100% 100%;
+  background-position: center;
   background-repeat: no-repeat;
-  margin: 30px auto;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 32px 60px rgba(0, 0, 0, 0.35);
+}
+
+.card_1 {
+  background-image: url("images/mdowod.png");
+}
+
+.card_2 {
+  background-image: url("images/mprawojazdy.png");
+}
+
+.card_3 {
+  display: none;
+}
+
+.card_4 {
+  display: none;
 }
 
 .card_label {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  margin: 0;
-  font-size: 24px;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  display: none;
 }
 
 .background {
@@ -146,3 +174,4 @@
   margin-right: auto;
   opacity: 0.5;
 }
+

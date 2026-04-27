@@ -45,7 +45,7 @@
 }
 
 .eye{
-    background-image: url('images/eye.png.html');
+    background-image: url('images/eye.png');
     position: absolute;
     top: 0;
     bottom: 0;
@@ -60,7 +60,7 @@
 }
 
 .eye_close{
-    background-image: url('images/eye_closed.png.html');
+    background-image: url('images/eye_closed.png');
 }
 
 .password_input{

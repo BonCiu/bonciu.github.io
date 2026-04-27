@@ -1,14 +1,21 @@
 .top_grid {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   margin-top: 15px;
+  padding-bottom: 10px;
+}
+
+.container {
+  padding: 18px 16px 20px;
 }
 
 .title {
   font-size: 35px;
   font-weight: 900;
   color: #1f2125;
+  margin: 0;
 }
 
 .main_button {
@@ -31,7 +38,7 @@
 }
 
 .ai_icon {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .right {
@@ -42,16 +49,19 @@
 .card_grid {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .button_container {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  width: 100%;
-  margin-top: 10px;
+  margin: 0;
 }
 
 .card_grid .main_button {
@@ -62,14 +72,9 @@
   margin-left: 3px;
 }
 
-.title {
-  font-size: 30px;
-  font-weight: bold;
-}
-
 .cards_container {
   width: 100%;
-  margin: 30px auto;
+  margin: 20px auto 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -77,13 +82,12 @@
 }
 
 .card {
-  width: 100%;
-  max-width: 500px;
-  height: 320px;
+  width: min(100%, 420px);
+  aspect-ratio: 3 / 2;
   border-radius: 28px;
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
-  background-size: 100% 100%;
-  background-position: center;
+  background-size: contain;
+  background-position: center center;
   background-repeat: no-repeat;
   cursor: pointer;
 }
@@ -174,4 +178,3 @@
   margin-right: auto;
   opacity: 0.5;
 }
-

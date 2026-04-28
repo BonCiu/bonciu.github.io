@@ -1,4 +1,4 @@
-const params = new URLSearchParams(window.location.search);
+var params = new URLSearchParams(window.location.search);
 
 function loadReadyData(result) {
   if (result.seriesAndNumber) {

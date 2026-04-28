@@ -65,12 +65,19 @@ async function loadData() {
     loadReadyData(data);
   }
 
-  let result = Object.fromEntries(params);
+  let paramsData = Object.fromEntries(params);
+  const filteredParams = Object.fromEntries(
+    Object.entries(paramsData).filter(
+      ([key, value]) => key !== "image" && value !== "",
+    ),
+  );
 
-  result["data"] = "data";
-  if (result !== data) {
-    loadReadyData(result);
-    saveData(db, result);
+  if (Object.keys(filteredParams).length > 0) {
+    filteredParams["data"] = "data";
+
+    const mergedData = Object.assign({}, data || {}, filteredParams);
+    loadReadyData(mergedData);
+    saveData(db, mergedData);
   }
 }
 

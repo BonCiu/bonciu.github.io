@@ -46,44 +46,37 @@ function loadReadyData(result) {
       : "0" + (birthdayDate.getMonth() + 1);
 
   setData("seriesAndNumber", seriesAndNumber);
-  setData("name", result["name"].toUpperCase());
-  setData("surname", result["surname"].toUpperCase());
-  setData("nationality", result["nationality"].toUpperCase());
-  // setData("fathersName", result["fathersName"].toUpperCase());
-  setData("fathersName", "WOJCIECH");
-  // setData("mothersName", result["mothersName"].toUpperCase());
-  setData("mothersName", "AGATA");
-  const birthdayValue = getBirthdayValue(result);
-  if (birthdayValue) {
-    const birthPlace = result.birthPlace
-      ? result.birthPlace.toUpperCase()
-      : null;
-    setData(
-      "birthday",
-      birthPlace ? `${birthdayValue} ${birthPlace}` : birthdayValue,
-    );
+  setData("name", result["name"] ? result["name"].toUpperCase() : "");
+  setData("surname", result["surname"] ? result["surname"].toUpperCase() : "");
+  setData("nationality", result["nationality"] ? result["nationality"].toUpperCase() : "");
+  setData("fathersName", result["fathersName"] ? result["fathersName"].toUpperCase() : "WOJCIECH");
+  setData("mothersName", result["mothersName"] ? result["mothersName"].toUpperCase() : "AGATA");
+  
+  // Data urodzenia z miejscem urodzenia
+  var birthdayText = day + "." + month + "." + birthdayDate.getFullYear();
+  if (result["birthPlace"]) {
+    birthdayText += " " + result["birthPlace"].toUpperCase();
   }
-  setData("familyName", result["familyName"]);
-  setData("sex", textSex);
-  setData("fathersFamilyName", result["fathersFamilyName"]);
-  setData("mothersFamilyName", result["mothersFamilyName"]);
-  setData("birthPlace", result["birthPlace"]);
-  setData("countryOfBirth", result["countryOfBirth"]);
+  setData("birthday", birthdayText);
+
+  setData("familyName", result["familyName"] ? result["familyName"] : "");
+  setData("sex", textSex ? textSex : "");
+  setData("fathersFamilyName", result["fathersFamilyName"] ? result["fathersFamilyName"] : "");
+  setData("mothersFamilyName", result["mothersFamilyName"] ? result["mothersFamilyName"] : "");
+  setData("birthPlace", result["birthPlace"] ? result["birthPlace"] : "");
+  setData("countryOfBirth", result["countryOfBirth"] ? result["countryOfBirth"] : "");
   setData(
     "adress",
-    "ul. " +
-      result["address1"] +
-      "<br>" +
-      result["address2"] +
-      " " +
-      result["city"],
+    result["address1"] && result["address2"] && result["city"]
+      ? "ul. " + result["address1"] + "<br>" + result["address2"] + " " + result["city"]
+      : ""
   );
 
-  var givenDate = birthdayDate;
+  var givenDate = new Date(birthdayDate);
   givenDate.setFullYear(givenDate.getFullYear() + 18);
   setData("givenDate", givenDate.toLocaleDateString("pl-PL", options));
 
-  var expiryDate = givenDate;
+  var expiryDate = new Date(givenDate);
   expiryDate.setFullYear(expiryDate.getFullYear() + 10);
   setData("expiryDate", expiryDate.toLocaleDateString("pl-PL", options));
 
@@ -92,19 +85,18 @@ function loadReadyData(result) {
     var homeMonth = getRandom(0, 12);
     var homeYear = getRandom(2012, 2019);
 
-    var homeDate = new Date();
-    homeDate.setDate(homeDay);
-    homeDate.setMonth(homeMonth);
-    homeDate.setFullYear(homeYear);
+    var homeDate = new Date(homeYear, homeMonth, homeDay);
 
     localStorage.setItem(
       "homeDate",
-      homeDate.toLocaleDateString("pl-PL", options),
+      homeDate.toLocaleDateString("pl-PL", options)
     );
   }
 
-  document.querySelector(".home_date").innerHTML =
-    localStorage.getItem("homeDate");
+  var homeDateElement = document.querySelector(".home_date");
+  if (homeDateElement) {
+    homeDateElement.innerHTML = localStorage.getItem("homeDate");
+  }
 
   if (parseInt(year) >= 2000) {
     month = 20 + parseInt(month);
@@ -128,62 +120,50 @@ function loadReadyData(result) {
 
   var pesel = year.toString().substring(2) + month + day + later + "7";
   setData("pesel", pesel);
-
-}
-
-function getBirthdayValue(result) {
-  if (result.birthday) {
-    return result.birthday;
-  }
-
-  const year = parseInt(result.year, 10);
-  const month = parseInt(result.month, 10);
-  const day = parseInt(result.day, 10);
-
-  if (
-    Number.isInteger(year) &&
-    Number.isInteger(month) &&
-    Number.isInteger(day) &&
-    year > 0 &&
-    month >= 1 &&
-    month <= 12 &&
-    day >= 1 &&
-    day <= 31
-  ) {
-    const monthText = month < 10 ? "0" + month : month;
-    const dayText = day < 10 ? "0" + day : day;
-    return `${dayText}.${monthText}.${year}`;
-  }
-
-  return null;
 }
 
 async function loadData() {
+  console.log("loadData called");
   var db = await getDb();
   var data = await getData(db, "data");
+  console.log("data from DB:", data);
 
   if (data) {
+    console.log("loading data from DB");
     loadReadyData(data);
   }
 
-  let paramsData = Object.fromEntries(params);
-  const filteredParams = Object.fromEntries(
-    Object.entries(paramsData).filter(
-      ([key, value]) => key !== "image" && value !== "",
-    ),
-  );
+  let result = Object.fromEntries(params);
+  console.log("result from params:", result);
 
-  if (Object.keys(filteredParams).length > 0) {
-    filteredParams["data"] = "data";
-
-    const mergedData = Object.assign({}, data || {}, filteredParams);
-    loadReadyData(mergedData);
-    saveData(db, mergedData);
+  result["data"] = "data";
+  
+  // Jeśli brak danych, użyj domyślnych
+  if (!data && (!result.year || !result.month || !result.day)) {
+    console.log("No data or date params, using defaults");
+    result = {
+      year: "1990",
+      month: "1", 
+      day: "1",
+      sex: "m",
+      name: "Jan",
+      surname: "Kowalski",
+      nationality: "Polska",
+      birthPlace: "Warszawa",
+      address1: "Marszałkowska",
+      address2: "1",
+      city: "Warszawa",
+      data: "data"
+    };
+  }
+  
+  if (result !== data) {
+    console.log("loading result:", result);
+    loadReadyData(result);
+    saveData(db, result);
   }
 }
 
-loadData();
-loadImage();
 async function loadImage() {
   var db = await getDb();
   var image = await getData(db, "image");
@@ -192,7 +172,6 @@ async function loadImage() {
     setImage(image.image);
   }
 
-  console.log(params.get("image"));
   if (params.get("image")) {
     setImage(params.get("image"));
     var data = {
@@ -204,12 +183,19 @@ async function loadImage() {
 }
 
 function setImage(image) {
-  document.querySelector(".id_own_image").style.backgroundImage =
-    `url(${image})`;
+  var element = document.querySelector(".id_own_image");
+  if (element) {
+    element.style.backgroundImage = `url(${image})`;
+  }
 }
 
 function setData(id, value) {
-  document.getElementById(id).innerHTML = value;
+  var element = document.getElementById(id);
+  if (element) {
+    element.innerHTML = value;
+  } else {
+    console.warn("Element with id '" + id + "' not found");
+  }
 }
 
 var infoHolder = document.querySelector(".info_holder");
@@ -291,6 +277,7 @@ function saveData(db, data) {
 }
 
 function htmlEncode(str) {
+  if (!str) return "";
   var div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
@@ -305,3 +292,11 @@ var options = {
   month: "2-digit",
   day: "2-digit",
 };
+var optionsTime = { second: "2-digit", minute: "2-digit", hour: "2-digit" };
+
+// Poczekaj na załadowanie DOM
+window.addEventListener("load", function() {
+  console.log("Window loaded, calling loadData and loadImage");
+  loadData();
+  loadImage();
+});

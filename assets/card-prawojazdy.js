@@ -1,18 +1,58 @@
 var params = new URLSearchParams(window.location.search);
 
 function loadReadyData(result) {
-  if (result.seriesAndNumber) {
-    setData("seriesAndNumber", result.seriesAndNumber);
+  Object.keys(result).forEach((key) => {
+    result[key] = htmlEncode(result[key]);
+  });
+
+  const birthdayDate = new Date();
+
+  birthdayDate.setFullYear(result["year"], result["month"] - 1, result["day"]);
+
+  var sex = result["sex"];
+
+  let day = birthdayDate.getDay();
+  let month = birthdayDate.getMonth();
+  let year = birthdayDate.getFullYear();
+
+  var textSex;
+  if (sex === "m") {
+    textSex = "Mężczyzna";
+  } else if (sex === "k") {
+    textSex = "Kobieta";
   }
-  if (result.name) {
-    setData("name", result.name);
+
+  var seriesAndNumber = localStorage.getItem("seriesAndNumber");
+  if (!seriesAndNumber) {
+    seriesAndNumber = "";
+    var chars = "ABCDEFGHIJKLMNOPQRSTUWXYZ".split("");
+    for (var i = 0; i < 4; i++) {
+      seriesAndNumber += chars[getRandom(0, chars.length)];
+    }
+    seriesAndNumber += " ";
+    for (var i = 0; i < 5; i++) {
+      seriesAndNumber += getRandom(0, 9);
+    }
+    localStorage.setItem("seriesAndNumber", seriesAndNumber);
   }
-  if (result.surname) {
-    setData("surname", result.surname);
-  }
-  if (result.nationality) {
-    setData("nationality", result.nationality);
-  }
+
+  day =
+    birthdayDate.getDate() > 9
+      ? birthdayDate.getDate()
+      : "0" + birthdayDate.getDate();
+  month =
+    birthdayDate.getMonth() + 1 > 9
+      ? birthdayDate.getMonth() + 1
+      : "0" + (birthdayDate.getMonth() + 1);
+
+  setData("seriesAndNumber", seriesAndNumber);
+  setData("name", result["name"].toUpperCase());
+  setData("surname", result["surname"].toUpperCase());
+  setData("nationality", result["nationality"].toUpperCase());
+  // setData("fathersName", result["fathersName"].toUpperCase());
+  setData("fathersName", "WOJCIECH");
+  // setData("mothersName", result["mothersName"].toUpperCase());
+  setData("mothersName", "AGATA");
   const birthdayValue = getBirthdayValue(result);
   if (birthdayValue) {
     const birthPlace = result.birthPlace
@@ -23,45 +63,72 @@ function loadReadyData(result) {
       birthPlace ? `${birthdayValue} ${birthPlace}` : birthdayValue,
     );
   }
-  if (result.pesel) {
-    setData("pesel", result.pesel);
+  setData("familyName", result["familyName"]);
+  setData("sex", textSex);
+  setData("fathersFamilyName", result["fathersFamilyName"]);
+  setData("mothersFamilyName", result["mothersFamilyName"]);
+  setData("birthPlace", result["birthPlace"]);
+  setData("countryOfBirth", result["countryOfBirth"]);
+  setData(
+    "adress",
+    "ul. " +
+      result["address1"] +
+      "<br>" +
+      result["address2"] +
+      " " +
+      result["city"],
+  );
+
+  var givenDate = birthdayDate;
+  givenDate.setFullYear(givenDate.getFullYear() + 18);
+  setData("givenDate", givenDate.toLocaleDateString("pl-PL", options));
+
+  var expiryDate = givenDate;
+  expiryDate.setFullYear(expiryDate.getFullYear() + 10);
+  setData("expiryDate", expiryDate.toLocaleDateString("pl-PL", options));
+
+  if (!localStorage.getItem("homeDate")) {
+    var homeDay = getRandom(1, 25);
+    var homeMonth = getRandom(0, 12);
+    var homeYear = getRandom(2012, 2019);
+
+    var homeDate = new Date();
+    homeDate.setDate(homeDay);
+    homeDate.setMonth(homeMonth);
+    homeDate.setFullYear(homeYear);
+
+    localStorage.setItem(
+      "homeDate",
+      homeDate.toLocaleDateString("pl-PL", options),
+    );
   }
-  if (result.expiryDate) {
-    setData("expiryDate", result.expiryDate);
+
+  document.querySelector(".home_date").innerHTML =
+    localStorage.getItem("homeDate");
+
+  if (parseInt(year) >= 2000) {
+    month = 20 + parseInt(month);
   }
-  if (result.givenDate) {
-    setData("givenDate", result.givenDate);
+
+  var later;
+
+  if (sex === "m") {
+    later = "0295";
+  } else {
+    later = "0382";
   }
-  if (result.fathersName) {
-    setData("fathersName", result.fathersName);
+
+  if (day < 10) {
+    day = "0" + day;
   }
-  if (result.mothersName) {
-    setData("mothersName", result.mothersName);
+
+  if (month < 10) {
+    month = "0" + month;
   }
-  if (result.familyName) {
-    setData("familyName", result.familyName);
-  }
-  if (result.sex) {
-    setData("sex", result.sex);
-  }
-  if (result.categories) {
-    setData("categories", result.categories);
-  }
-  if (result.fathersFamilyName) {
-    setData("fathersFamilyName", result.fathersFamilyName);
-  }
-  if (result.mothersFamilyName) {
-    setData("mothersFamilyName", result.mothersFamilyName);
-  }
-  if (result.birthPlace) {
-    setData("birthPlace", result.birthPlace);
-  }
-  if (result.countryOfBirth) {
-    setData("countryOfBirth", result.countryOfBirth);
-  }
-  if (result.adress) {
-    setData("adress", result.adress);
-  }
+
+  var pesel = year.toString().substring(2) + month + day + later + "7";
+  setData("pesel", pesel);
+
 }
 
 function getBirthdayValue(result) {
@@ -222,3 +289,19 @@ function saveData(db, data) {
     };
   });
 }
+
+function htmlEncode(str) {
+  var div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+var options = {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+};

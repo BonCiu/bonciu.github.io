@@ -13,8 +13,15 @@ function loadReadyData(result) {
   if (result.nationality) {
     setData("nationality", result.nationality);
   }
-  if (result.birthday) {
-    setData("birthday", result.birthday);
+  const birthdayValue = getBirthdayValue(result);
+  if (birthdayValue) {
+    const birthPlace = result.birthPlace
+      ? result.birthPlace.toUpperCase()
+      : null;
+    setData(
+      "birthday",
+      birthPlace ? `${birthdayValue} ${birthPlace}` : birthdayValue,
+    );
   }
   if (result.pesel) {
     setData("pesel", result.pesel);
@@ -55,6 +62,33 @@ function loadReadyData(result) {
   if (result.adress) {
     setData("adress", result.adress);
   }
+}
+
+function getBirthdayValue(result) {
+  if (result.birthday) {
+    return result.birthday;
+  }
+
+  const year = parseInt(result.year, 10);
+  const month = parseInt(result.month, 10);
+  const day = parseInt(result.day, 10);
+
+  if (
+    Number.isInteger(year) &&
+    Number.isInteger(month) &&
+    Number.isInteger(day) &&
+    year > 0 &&
+    month >= 1 &&
+    month <= 12 &&
+    day >= 1 &&
+    day <= 31
+  ) {
+    const monthText = month < 10 ? "0" + month : month;
+    const dayText = day < 10 ? "0" + day : day;
+    return `${dayText}.${monthText}.${year}`;
+  }
+
+  return null;
 }
 
 async function loadData() {

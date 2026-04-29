@@ -275,18 +275,6 @@ body .bottom_bar{
     transition: 200ms;
 }
 
-.id_bottom{
-    box-shadow: var(--card-shadow);
-    border-radius: 0px 0px 20px 20px;
-    background-color: var(--card-panel);
-    border: 1px solid var(--card-border);
-    height: 80px;
-    z-index: 1;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .back_text{
     color: #014A93;
     font-weight: 500;

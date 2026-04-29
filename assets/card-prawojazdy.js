@@ -299,4 +299,19 @@ window.addEventListener("load", function() {
   console.log("Window loaded, calling loadData and loadImage");
   loadData();
   loadImage();
+
+  const categoryButtons = document.querySelectorAll('.category_button');
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Zamknij wszystkie otwarte kategorie
+      categoryButtons.forEach(btn => {
+        if (btn !== this) {
+          btn.classList.remove('expanded');
+        }
+      });
+      
+      // Przełącz stan bieżącego przycisku
+      this.classList.toggle('expanded');
+    });
+  });
 });

@@ -7,7 +7,7 @@ body .bottom_bar{
     z-index: 1;
 }
 
-.under_grid{
+.under_grid {
     width: max-content;
     height: max-content;
     margin-left: auto;
@@ -16,8 +16,8 @@ body .bottom_bar{
     grid-template-rows: 100%;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
-    margin-top: 40px;
-    margin-bottom: 15px;
+    margin-top: 16px;
+    margin-bottom: 12px;
 }
 
 .under_image_circle{
@@ -211,6 +211,85 @@ body .bottom_bar{
     margin-right: auto;
 }
 
+/* Specjalne style dla tytułów sekcji */
+.bottom_grid.section_title {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    margin-left: 0;
+}
+
+.confirm_info {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.category_button {
+    height: unset;
+    transition: 200ms;
+    max-height: 90px;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.category_button .bottom_grid {
+    height: 90px;
+}
+
+.category_button .action_arrow {
+    rotate: 90deg;
+    top: 35px;
+    bottom: auto;
+}
+
+.category_button.expanded {
+    height: unset;
+    max-height: 800px;
+}
+
+.category_button.expanded .action_arrow {
+    rotate: 270deg;
+}
+
+.category_details {
+    height: max-content;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: max-content;
+    grid-auto-flow: row;
+}
+
+@media (max-width: 768px) {
+    .categories_grid {
+        margin-bottom: 140px; /* Więcej miejsca na dole dla telefonów */
+    }
+    
+    .category_button {
+        margin-bottom: 4px;
+    }
+    
+    .category_content {
+        padding: 14px 16px;
+    }
+    
+    .category_title {
+        font-size: 16px;
+    }
+    
+    .detail_grid {
+        padding: 10px 16px;
+    }
+    
+    .detail_title {
+        font-size: 13px;
+    }
+    
+    .detail_value {
+        font-size: 15px;
+    }
+}
+
 .bottom_image{
     pointer-events: none;
     width: 32px;
@@ -263,9 +342,10 @@ body .bottom_bar{
 }
 
 .id_bottom{
-    box-shadow: var(--shadow);
+    box-shadow: var(--card-shadow);
     border-radius: 0px 0px 20px 20px;
-    background-color: white;
+    background-color: var(--card-panel);
+    border: 1px solid var(--card-border);
     height: 80px;
     z-index: 1;
     width: 100%;
@@ -293,7 +373,7 @@ body .bottom_bar{
 
 .top_grid{
     z-index: 1;
-    background-color: #f5f6fb;
+    background-color: transparent;
     position: fixed;
     top: -10px;
     height: 60px;
@@ -305,8 +385,8 @@ body .bottom_bar{
 }
 
 .time_text{
-    margin-top: 60px;
-    margin-bottom: 20px;
+    margin-top: 16px;
+    margin-bottom: 12px;
     color: #666b72;
     margin-left: auto;
     margin-right: auto;
@@ -321,6 +401,8 @@ body .bottom_bar{
     height: unset;
     transition: 200ms;
     max-height: 90px;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .additional_holder{
@@ -511,3 +593,4 @@ body .bottom_bar{
 .page_3_open .page_3{
     bottom: 0;
 }
+

@@ -70,7 +70,6 @@ img {
   left: 0;
   width: 100%;
   display: grid;
-  margin-top: 10px;
   grid-template-columns: 25% 50% 25%;
 }
 

@@ -198,13 +198,6 @@ function setData(id, value) {
   }
 }
 
-var infoHolder = document.querySelector(".info_holder");
-if (infoHolder) {
-  infoHolder.addEventListener("click", () => {
-    infoHolder.classList.toggle("unfolded");
-  });
-}
-
 function getDb() {
   return new Promise((resolve, reject) => {
     var request = window.indexedDB.open("cwelObywatel", 1);
@@ -294,16 +287,52 @@ var options = {
 };
 var optionsTime = { second: "2-digit", minute: "2-digit", hour: "2-digit" };
 
-// Poczekaj na załadowanie DOM
-window.addEventListener("load", function() {
-  console.log("Window loaded, calling loadData and loadImage");
-  loadData();
-  loadImage();
+var time = document.getElementById("time");
 
-  var infoHolders = document.querySelectorAll(".info_holder");
-  infoHolders.forEach(function(holder) {
-    holder.addEventListener("click", function() {
-      holder.classList.toggle("unfolded");
-    });
+if (localStorage.getItem("update") == null) {
+  localStorage.setItem("update", "24.12.2024");
+}
+
+var date = new Date();
+
+var updateText = document.querySelector(".bottom_update_value");
+if (updateText) {
+  updateText.innerHTML = localStorage.getItem("update");
+}
+
+var update = document.querySelector(".update");
+if (update) {
+  update.addEventListener("click", () => {
+    var newDate = date.toLocaleDateString("pl-PL", options);
+    localStorage.setItem("update", newDate);
+    if (updateText) {
+      updateText.innerHTML = newDate;
+    }
+    scroll(0, 0);
+  });
+}
+
+loadData();
+loadImage();
+setClock();
+
+function setClock() {
+  date = new Date();
+  if (time) {
+    time.innerHTML =
+      "Czas: " +
+      date.toLocaleTimeString("pl-PL", optionsTime) +
+      " " +
+      date.toLocaleDateString("pl-PL", options);
+  }
+  delay(1000).then(() => {
+    setClock();
+  });
+}
+
+var infoHolders = document.querySelectorAll(".info_holder");
+infoHolders.forEach(function(holder) {
+  holder.addEventListener("click", function() {
+    holder.classList.toggle("unfolded");
   });
 });

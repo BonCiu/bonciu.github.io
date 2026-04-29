@@ -211,83 +211,8 @@ body .bottom_bar{
     margin-right: auto;
 }
 
-/* Specjalne style dla tytułów sekcji */
-.bottom_grid.section_title {
-    margin-top: 10px;
-    margin-bottom: 8px;
-    margin-left: 0;
-}
-
 .confirm_info {
-    margin-top: 0;
     margin-bottom: 10px;
-}
-
-.category_button {
-    height: unset;
-    transition: 200ms;
-    max-height: 90px;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-
-.category_button .bottom_grid {
-    height: 90px;
-}
-
-.category_button .action_arrow {
-    rotate: 90deg;
-    top: 35px;
-    bottom: auto;
-}
-
-.category_button.expanded {
-    height: unset;
-    max-height: 800px;
-}
-
-.category_button.expanded .action_arrow {
-    rotate: 270deg;
-}
-
-.category_details {
-    height: max-content;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-auto-rows: max-content;
-    grid-auto-flow: row;
-}
-
-@media (max-width: 768px) {
-    .categories_grid {
-        margin-bottom: 140px; /* Więcej miejsca na dole dla telefonów */
-    }
-    
-    .category_button {
-        margin-bottom: 4px;
-    }
-    
-    .category_content {
-        padding: 14px 16px;
-    }
-    
-    .category_title {
-        font-size: 16px;
-    }
-    
-    .detail_grid {
-        padding: 10px 16px;
-    }
-    
-    .detail_title {
-        font-size: 13px;
-    }
-    
-    .detail_value {
-        font-size: 15px;
-    }
 }
 
 .bottom_image{
@@ -324,7 +249,7 @@ body .bottom_bar{
     height: 40%;
     background-color: white;
     background-position: center;
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 0;
 }
@@ -391,6 +316,17 @@ body .bottom_bar{
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+.section_header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #eef5ff;
+    height: max-content;
 }
 
 .info_holder .bottom_grid{

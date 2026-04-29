@@ -8,7 +8,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <link rel="stylesheet" href="assets/main.css" />
-  <link rel="stylesheet" href="assets/card.css" />
+  <link rel="stylesheet" href="assets/card.css?v=2" />
   <link rel="icon" type="image/x-icon" href="assets/images/logo.png" />
   <link rel="apple-touch-icon" href="assets/images/logo.png" />
   <link rel="shortcut icon" href="assets/images/logo.png" />
@@ -51,13 +51,13 @@
   <div class="container">
     <p class="time_text" id="time"></p>
     <div class="id_image_data">
-      <img draggable="false" class="id_image" src="assets/images/plate.png" />
+      <img draggable="false" class="id_image" src="assets/images/prawojazdy_plate.png" />
       <div class="inset"></div>
       <div class="id_own_image"></div>
       <img draggable="false" src="assets/images/flag.webp" class="flag_video" />
       <img
         draggable="false"
-        src="assets/images/eagle.gif"
+        src="assets/images/godlo.gif"
         class="eagle_video"
       />
       <p class="eagle_text">Rzeczpospolita<br />Polska</p>
@@ -80,7 +80,7 @@
           <p class="data_value">Numer PESEL</p>
         </div>
         <div class="data_holder">
-          <p class="data_title">A2, A1, B</p>
+          <p class="data_title">A2, A1, AM,  B1, B</p>
           <p class="data_value">Kategorie</p>
         </div>
       </div>
@@ -129,7 +129,7 @@
         </div>
       </div>
     </div>
-          <div class="bottom_holder" style="height: 90px; margin-bottom: 120px">
+          <div class="bottom_holder bottom_holder_update" style="margin-bottom: 16px">
         <div class="bottom_update">
           <div class="bottom_update_grid">
             <p class="bottom_update_text" style="margin-left: 0px">
@@ -140,6 +140,9 @@
           <button class="main_button update">Aktualizuj</button>
           </div>
           </div>
+    <div class="bottom_grid section_title">
+      <p class="bottom_text" style="color: #1f2125; margin-left: 0px">Dane dokumentu</p>
+    </div>
     <div class="confirm_info">
       <div class="confirm_box">
         <p class="box_top">Data ważności</p>
@@ -166,54 +169,121 @@
         <p class="box_value">STAROSTA ŚWIDNICKI</p>
       </div>
         <div class="confirm_box" style="border: none">
-        <p class="box_top">Ograniczenie</p>
+        <p class="box_top">Ograniczenia</p>
         <p class="box_value">-</p>
       </div>
     </div>
-    <div class="other_grid">
-      <div class="bottom_holder info_holder">
+    <div class="bottom_grid section_title">
+      <p class="bottom_text" style="color: #1f2125; margin-left: 0px">Kategorie</p>
+    </div>
+    <div class="categories_grid">
+      <div class="bottom_holder category_button" data-category="A2">
         <div class="bottom_grid">
-          <p class="bottom_text" style="color: #1f2125; margin-left: 0px">
-            Kategorie
+          <p class="bottom_text" style="color: #e7eefb; margin-left: 0px">
+            Kategoria A2
           </p>
         </div>
         <img class="action_arrow" src="assets/images/right_arrow.png" />
-        <div class="additional_holder">
+        <div class="additional_holder category_details">
           <div class="additional_grid">
-            <p class="additional_title">Nazwisko rodowe</p>
-            <p class="additional_subtitle" id="familyName"></p>
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="a2_obtained_date">15.03.2020</p>
           </div>
           <div class="additional_grid">
-            <p class="additional_title">Płeć</p>
-            <p class="additional_subtitle" id="sex"></p>
-          </div>
-          <div class="additional_grid">
-            <p class="additional_title">Kategorie</p>
-            <p class="additional_subtitle" id="categories"></p>
-          </div>
-          <div class="additional_grid">
-            <p class="additional_title">Nazwisko rodowe ojca</p>
-            <p class="additional_subtitle" id="fathersFamilyName"></p>
-          </div>
-          <div class="additional_grid">
-            <p class="additional_title">Nazwisko rodowe matki</p>
-            <p class="additional_subtitle" id="mothersFamilyName"></p>
-          </div>
-          <div class="additional_grid">
-            <p class="additional_title">Miejsce urodzenia</p>
-            <p class="additional_subtitle" id="birthPlace"></p>
-          </div>
-          <div class="additional_grid">
-            <p class="additional_title">Kraj urodzenia</p>
-            <p class="additional_subtitle" id="countryOfBirth"></p>
-          </div>
-          <div class="additional_grid">
-            <p class="additional_title">Adres zameldowania na pobyt stały</p>
-            <p class="additional_subtitle" id="adress"></p>
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="a2_expiry_date">15.03.2030</p>
           </div>
           <div class="additional_grid" style="border-bottom: none">
-            <p class="additional_title">Data zameldowania na pobyt stały</p>
-            <p class="additional_subtitle home_date"></p>
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="a2_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder category_button" data-category="A1">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #e7eefb; margin-left: 0px">
+            Kategoria A1
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder category_details">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="a1_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="a1_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="a1_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder category_button" data-category="AM">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #e7eefb; margin-left: 0px">
+            Kategoria AM
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder category_details">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="am_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="am_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="am_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder category_button" data-category="B1">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #e7eefb; margin-left: 0px">
+            Kategoria B1
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder category_details">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="b1_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="b1_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="b1_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder category_button" data-category="B">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #e7eefb; margin-left: 0px">
+            Kategoria B
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder category_details">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="b_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="b_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="b_restrictions">-</p>
           </div>
         </div>
       </div>

@@ -300,18 +300,10 @@ window.addEventListener("load", function() {
   loadData();
   loadImage();
 
-  const categoryButtons = document.querySelectorAll('.category_button');
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      // Zamknij wszystkie otwarte kategorie
-      categoryButtons.forEach(btn => {
-        if (btn !== this) {
-          btn.classList.remove('expanded');
-        }
-      });
-      
-      // Przełącz stan bieżącego przycisku
-      this.classList.toggle('expanded');
+  var infoHolders = document.querySelectorAll(".info_holder");
+  infoHolders.forEach(function(holder) {
+    holder.addEventListener("click", function() {
+      holder.classList.toggle("unfolded");
     });
   });
 });

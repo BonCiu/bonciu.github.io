@@ -213,24 +213,6 @@
     width: 55px;
 }
 
-.logo_other{
-    height: 38px;
-    margin-left: 0px;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.version{
-    margin-right: 0px;
-    opacity: 0.5;
-    font-size: 11px;
-    height: max-content;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: max-content;
-    margin-left: auto;
-}
-
 .update_notification {
     width: 97%;
     background: linear-gradient(90deg, #e8f4ff 0%, #f0e8ff 100%);

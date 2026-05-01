@@ -8,7 +8,7 @@
 
 .password_box{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     height: 165px;
     background-color: white;
     margin-left: auto;
@@ -141,7 +141,7 @@
     margin-top: auto;
     margin-bottom: auto;
     height: max-content;
-    margin-top: 25px;
+    margin-top: 12px;
 }
 
 .background{
@@ -165,7 +165,7 @@
 }
 
 .top_grid{
-    margin-top: 60px;
+    margin-top: 18px;
     display: grid;
     grid-template-columns: max-content max-content;
     grid-template-rows: 100%;

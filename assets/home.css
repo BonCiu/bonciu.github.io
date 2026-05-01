@@ -24,7 +24,7 @@
   border: none !important;
   font-size: 16px !important;
   font-weight: normal !important;
-  padding: 0 !important;
+  padding: 12px 20px !important;
   margin: 0 !important;
 }
 
@@ -60,7 +60,7 @@
 .button_container {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
   margin: 0;
 }
 

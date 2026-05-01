@@ -90,8 +90,10 @@ img {
 }
 
 .box_top.note_text {
-  margin-top: 8px;
+  margin-top: 4px;
+  font-size: 15px;
 }
+
 .confirm_info {
   box-shadow: var(--shadow);
   width: 100%;
@@ -171,10 +173,7 @@ img {
 .confirm_box .main_button {
   position: absolute;
   right: 10px;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
+  top: 10px;
   margin-right: 0;
 }
 

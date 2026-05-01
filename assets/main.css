@@ -89,6 +89,9 @@ img {
   height: max-content;
 }
 
+.box_top.note_text {
+  margin-top: 8px;
+}
 .confirm_info {
   box-shadow: var(--shadow);
   width: 100%;

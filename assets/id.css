@@ -122,9 +122,9 @@
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-columns: repeat(4, max-content);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
     background-color: white;
     padding: 12px 14px;
@@ -132,11 +132,19 @@
     box-shadow: var(--shadow);
 }
 
+.logo_other{
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    object-fit: contain;
+}
+
 .version{
     width: max-content;
     margin: 10px auto 0;
     opacity: 0.6;
     font-size: 12px;
+    text-align: center;
 }
 
 .logo_text{

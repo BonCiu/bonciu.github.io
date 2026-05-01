@@ -34,6 +34,19 @@
       left: 17% !important;
       width: 21% !important;
     }
+      .box_value.status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .box_value.status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #05680d;
+      display: inline-block;
+    }
   </style>
   <link rel="icon" type="image/x-icon" href="assets/images/logo.png" />
   <link rel="apple-touch-icon" href="assets/images/logo.png" />
@@ -180,7 +193,7 @@
       </div>
       <div class="confirm_box">
         <p class="box_top">Status blankietu</p>
-        <p class="box_value">Wydany</p>
+        <p class="box_value status">Wydany</p>
       </div>
       <div class="confirm_box">
         <p class="box_top">Numer dokumentu</p>

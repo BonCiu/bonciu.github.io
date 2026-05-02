@@ -176,7 +176,7 @@ img {
   top: 0;
   bottom: 0;
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: 10px;
   margin-right: 0;
 }
 

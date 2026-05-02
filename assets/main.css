@@ -173,10 +173,10 @@ img {
 .confirm_box .main_button {
   position: absolute;
   right: 10px;
-  top: 0;
+  top: 10px;
   bottom: 0;
   margin-top: auto;
-  margin-bottom: 10px;
+  margin-bottom: auto;
   margin-right: 0;
 }
 

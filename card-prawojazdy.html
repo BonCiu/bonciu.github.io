@@ -1,0 +1,336 @@
+<head>
+  <title>mObywatel</title>
+  <meta charset="UTF-8" />
+  <meta
+    http-equiv="Cache-Control"
+    content="no-cache, no-store, must-revalidate"
+  />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="stylesheet" href="assets/main.css" />
+  <link rel="stylesheet" href="assets/card.css" />
+    <style>
+    .inset, .id_own_image {
+      top: 2% !important;
+      left: 6% !important;
+      width: 38% !important;
+      height: 52% !important;
+    }
+    .id_own_image {
+      background-position: center top !important;
+    }
+    .flag_video {
+      top: 62% !important;
+      left: 6% !important;
+      width: 20% !important;
+    }
+    .eagle_video {
+      top: 78% !important;
+      left: 6.2% !important;
+      width: 9% !important;
+    }
+    .eagle_text {
+      top: 80% !important;
+      left: 17% !important;
+      width: 21% !important;
+    }
+      .box_value.status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .box_value.status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #05680d;
+      display: inline-block;
+    }
+  </style>
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.png" />
+  <link rel="apple-touch-icon" href="assets/images/logo.png" />
+  <link rel="shortcut icon" href="assets/images/logo.png" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=0.8, user-scalable=no"
+  />
+  <meta name="mobile-web-app-capable" content="yes" />
+</head>
+<body>
+  <div class="top_grid_fixed">
+    <div class="action_grid_fixed">
+      <img src="assets/images/back_blue.png" class="back_img_fixed" />
+      <p onclick="sendTo('home')" class="back_text_fixed">Dokumenty</p>
+    </div>
+    <p class="title_text_fixed">mPrawo jazdy</p>
+    <img src="assets/images/help.png" class="help_img_fixed" />
+  </div>
+  <div class="bottom_bar">
+    <div class="bottom_bar_grid">
+      <div class="bottom_element_grid" send="home">
+        <div class="bottom_element_image documents_open"></div>
+        <p class="bottom_element_text open">Dokumenty</p>
+      </div>
+      <div class="bottom_element_grid" send="services">
+        <div class="bottom_element_image services"></div>
+        <p class="bottom_element_text">Usługi</p>
+      </div>
+      <div class="bottom_element_grid" send="qr">
+        <div class="bottom_element_image qr"></div>
+        <p class="bottom_element_text">Kod QR</p>
+      </div>
+      <div class="bottom_element_grid" send="more">
+        <div class="bottom_element_image more"></div>
+        <p class="bottom_element_text">Więcej</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <p class="time_text" id="time"></p>
+    <div class="id_image_data">
+      <img draggable="false" class="id_image" src="assets/images/prawojazdy_plate.png" />
+      <div class="inset"></div>
+      <div class="id_own_image"></div>
+      <img draggable="false" src="assets/images/flag.webp" class="flag_video" />
+      <img
+        draggable="false"
+        src="assets/images/godlo.gif"
+        class="eagle_video"
+      />
+      <p class="eagle_text">Rzeczpospolita<br />Polska</p>
+      <div class="id_data_grid">
+        <div class="data_holder">
+          <p class="data_title firstname" id="name"></p>
+          <p class="data_value">Imię (imiona)</p>
+        </div>
+        <div class="data_holder">
+          <p class="data_title surname" id="surname"></p>
+          <p class="data_value">Nazwisko</p>
+        </div>
+        <div class="data_holder">
+          <p class="data_title" id="birthday"></p>
+          <p class="data_value">Data i miejsce urodzenia</p>
+        </div>
+
+        <div class="data_holder">
+          <p class="data_title" id="pesel"></p>
+          <p class="data_value">Numer PESEL</p>
+        </div>
+        <div class="data_holder">
+          <p class="data_title">A2, A1, AM,  B1, B</p>
+          <p class="data_value">Kategorie</p>
+        </div>
+      </div>
+    </div>
+    <div class="id_bottom">
+      <div class="bottom_grid">
+        <img class="bottom_image" src="assets/images/valid.png" />
+        <p
+          class="bottom_text"
+          style="
+            color: #317c26;
+            font-weight: 400;
+            font-size: 18px;
+            margin-left: 20px;
+          "
+        >
+          Dokument ważny
+        </p>
+      </div>
+    </div>
+    <div class="under_container">
+      <div class="under_grid">
+        <div class="under_icon" onclick="sendTo('scan', 'card')">
+          <div class="under_image_circle">
+            <img class="under_image" src="assets/images/confirm.png" />
+          </div>
+          <p class="under_text">Potwierdź swoje dane</p>
+        </div>
+        <div class="under_icon" onclick="sendTo('document')">
+          <div class="under_image_circle">
+            <img class="under_image" src="assets/images/penalties.png" />
+          </div>
+          <p class="under_text">Punkty karne</p>
+        </div>
+        <div class="under_icon" onclick="sendTo('pesel')">
+          <div class="under_image_circle">
+            <img class="under_image" src="assets/images/car_crash.svg" />
+          </div>
+          <p class="under_text">Stłuczka</p>
+        </div>
+        <div class="under_icon" onclick="sendTo('shortcuts')">
+          <div class="under_image_circle">
+            <img class="under_image" src="assets/images/more.png" />
+          </div>
+          <p class="under_text">Pozostałe skróty</p>
+        </div>
+      </div>
+    </div>
+    <div class="other_grid" style="margin-top: 20px;">
+      <div class="bottom_holder" style="height: 90px; margin-bottom: 0">
+        <div class="bottom_update">
+          <div class="bottom_update_grid">
+            <p class="bottom_update_text" style="margin-left: 0px">
+              Ostatnia aktualizacja
+            </p>
+            <p class="bottom_update_value" style="margin-left: 0px"></p>
+          </div>
+          <button class="main_button update">Aktualizuj</button>
+        </div>
+      </div>
+    </div>
+    <p class="section_header">Dane dokumentu</p>
+    <div class="confirm_info">
+      <div class="confirm_box">
+        <p class="box_top">Data ważności</p>
+        <p class="box_value" id="expiryDate"></p>
+      </div>
+      <div class="confirm_box">
+        <p class="box_top">Data wydania</p>
+        <p class="box_value" id="givenDate"></p>
+      </div>
+      <div class="confirm_box">
+        <p class="box_top">Status blankietu</p>
+        <p class="box_value status">Wydany</p>
+      </div>
+      <div class="confirm_box">
+        <p class="box_top">Numer dokumentu</p>
+        <p class="box_value">014306967255</p>
+      </div>
+      <div class="confirm_box">
+        <p class="box_top">Numer blankietu</p>
+        <p class="box_value">CA7539270</p>
+      </div>
+      <div class="confirm_box">
+        <p class="box_top">Organ wydający</p>
+        <p class="box_value">STAROSTA ŚWIDNICKI</p>
+      </div>
+      <div class="confirm_box" style="border: none">
+        <p class="box_top">Ograniczenia</p>
+        <p class="box_value">-</p>
+      </div>
+    </div>
+    <p class="section_header">Kategorie</p>
+    <div class="other_grid">
+      <div class="bottom_holder info_holder">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #1f2125; margin-left: 0px">
+            Kategoria A2
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="a2_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="a2_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="a2_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder info_holder">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #1f2125; margin-left: 0px">
+            Kategoria A1
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="a1_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="a1_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="a1_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder info_holder">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #1f2125; margin-left: 0px">
+            Kategoria AM
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="am_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="am_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="am_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder info_holder">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #1f2125; margin-left: 0px">
+            Kategoria B1
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="b1_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="b1_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="b1_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_holder info_holder">
+        <div class="bottom_grid">
+          <p class="bottom_text" style="color: #1f2125; margin-left: 0px">
+            Kategoria B
+          </p>
+        </div>
+        <img class="action_arrow" src="assets/images/right_arrow.png" />
+        <div class="additional_holder">
+          <div class="additional_grid">
+            <p class="additional_title">Data uzyskania</p>
+            <p class="additional_subtitle" id="b_obtained_date">15.03.2020</p>
+          </div>
+          <div class="additional_grid">
+            <p class="additional_title">Data ważności</p>
+            <p class="additional_subtitle" id="b_expiry_date">15.03.2030</p>
+          </div>
+          <div class="additional_grid" style="border-bottom: none">
+            <p class="additional_title">Ograniczenia</p>
+            <p class="additional_subtitle" id="b_restrictions">-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/encode.js"></script>
+  <script src="assets/bar.js"></script>
+  <script src="assets/card-prawojazdy.js"></script>
+  <script src="assets/manifest.js"></script>
+  <script src="assets/cache.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="assets/access.js"></script>
+</body>

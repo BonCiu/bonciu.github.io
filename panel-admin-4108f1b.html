@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Panel admina</title>
+  <link rel="stylesheet" href="assets/main.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #071018;
+      color: #e8f1ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .admin-wrapper {
+      width: min(760px, 100%);
+      background: rgba(8, 18, 35, 0.96);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.35);
+      display: grid;
+      gap: 24px;
+    }
+    .admin-header h1 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+    .admin-header p {
+      margin: 12px 0 0;
+      color: rgba(232,241,255,0.72);
+      line-height: 1.6;
+    }
+    .admin-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+    .admin-card label {
+      font-weight: 700;
+      color: #d6e4ff;
+    }
+    .admin-card input {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      padding: 0 16px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .admin-card input:focus {
+      border-color: #57d9fd;
+      background: rgba(87,217,253,0.08);
+    }
+    .admin-card button {
+      width: fit-content;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 26px;
+      background: linear-gradient(90deg, #26c8ff, #02a7ff);
+      color: #071018;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .admin-message {
+      color: #76ff9d;
+      min-height: 20px;
+    }
+    .admin-error {
+      color: #ff8585;
+    }
+    .admin-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .admin-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-family: inherit;
+    }
+    .admin-list button {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 8px 14px;
+    }
+    .admin-footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .admin-footer a {
+      color: #7fdcff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-wrapper">
+    <div class="admin-header">
+      <h1>Panel administratora</h1>
+      <p>Logowanie tylko dla administratora. Tutaj możesz dodawać i usuwać kody dostępu, które zostaną użyte w aplikacji.</p>
+    </div>
+    <div id="admin-auth" class="admin-card">
+      <label for="admin-password">Hasło administratora</label>
+      <input id="admin-password" type="password" placeholder="Wprowadź hasło" autocomplete="off" />
+      <button id="admin-login">Zaloguj się</button>
+      <div id="admin-auth-message" class="admin-message"></div>
+    </div>
+    <div id="admin-panel" class="admin-card" style="display:none;">
+      <div>
+        <label for="new-access-code">Nowy kod dostępu</label>
+        <input id="new-access-code" type="text" maxlength="6" placeholder="6 cyfr" autocomplete="off" />
+        <button id="add-access-code">Dodaj kod</button>
+        <div id="admin-panel-message" class="admin-message"></div>
+      </div>
+      <div>
+        <h2>Aktywne kody</h2>
+        <ul id="codes-list" class="admin-list"></ul>
+      </div>
+      <div class="admin-footer">
+        <button id="admin-logout">Wyloguj</button>
+        <a href="id.html">Przejdź do strony logowania</a>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="assets/admin-panel.js"></script>
+</body>
+</html>

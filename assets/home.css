@@ -1,0 +1,182 @@
+.top_grid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+.container {
+  padding: 0 16px !important;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: 900;
+  color: #1f2125;
+  margin: 0;
+}
+
+.main_button {
+  background-color: transparent !important;
+  color: #1566d4 !important;
+  border: none !important;
+  font-size: 16px !important;
+  font-weight: normal !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main_button:hover {
+  background-color: transparent !important;
+  text-decoration: underline;
+}
+
+.top_image {
+  width: 35px;
+}
+
+.ai_icon {
+  margin-left: 10px;
+}
+
+.right {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.card_grid {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 0;
+}
+
+.card_grid .main_button {
+  margin-right: 0;
+}
+
+.all_documents {
+  margin-left: 3px;
+}
+
+.cards_container {
+  width: 100%;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 3 / 2;
+  border-radius: 28px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 20px 36px rgba(0, 0, 0, 0.16);
+}
+
+.card_1 {
+  background-image: url("images/mdowod_upscaled.png");
+}
+
+.card_2 {
+  background-image: url("images/mprawojazdy_upscaled.png");
+}
+
+.card_3 {
+  display: none;
+}
+
+.card_4 {
+  display: none;
+}
+
+.card_label {
+  display: none;
+}
+
+.background {
+  display: none;
+}
+
+.id_bottom {
+  display: none;
+}
+
+.human {
+  display: none;
+}
+
+.card_below_grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+  height: max-content;
+}
+
+.card_below_grid .main_button {
+  margin-right: 0;
+}
+
+.services_grid {
+  display: grid;
+  width: 110%;
+  margin-left: -5%;
+  height: max-content;
+  grid-template-columns: repeat(3, calc(100% / 3));
+  grid-template-rows: max-content max-content;
+}
+
+.service_box {
+  width: max-content;
+  height: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: auto;
+}
+
+.service_box_icon {
+  box-shadow: var(--shadow);
+  width: 50px;
+  background-color: white;
+  border-radius: 25px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 10px;
+}
+
+.service_box_name {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 16px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.5;
+}

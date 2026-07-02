@@ -546,7 +546,13 @@
               <div>
                 <span class="log-email">${log.email}</span>
                 <div class="log-time">${timeStr}</div>
-                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 4px;">IP: ${log.ipAddress}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 4px;">IP: ${log.ipAddress || 'unknown'}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 2px;">Lokalizacja: ${log.location || 'unknown'}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 2px;">Urządzenie: ${log.device || 'unknown'} · ${log.browser || 'unknown'}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 2px;">System: ${log.os || 'unknown'} · ${log.language || 'unknown'}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 2px;">Żądanie: ${log.method || 'GET'} ${log.path || ''}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 2px;">Referer: ${log.referrer || 'unknown'}</div>
+                <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 2px;">Origin: ${log.origin || 'unknown'}</div>
               </div>
             </div>
           `;

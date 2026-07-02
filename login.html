@@ -325,6 +325,47 @@
 
     switchToRegister.addEventListener('click', registerTab.click);
 
+    function getDeviceType() {
+      const ua = navigator.userAgent;
+      if (/iPad|tablet|playbook|silk/i.test(ua)) return 'Tablet';
+      if (/Mobile|Android|iPhone|iPod|Opera Mini|IEMobile/i.test(ua)) return 'Mobile';
+      return 'Desktop';
+    }
+
+    function getBrowserName() {
+      const ua = navigator.userAgent;
+      if (/Edg\//.test(ua)) return 'Edge';
+      if (/Chrome\//.test(ua) && !/Edg\//.test(ua)) return 'Chrome';
+      if (/Firefox\//.test(ua)) return 'Firefox';
+      if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+      if (/OPR\//.test(ua)) return 'Opera';
+      return 'Unknown';
+    }
+
+    function getClientInfo() {
+      return {
+        userAgent: navigator.userAgent,
+        browser: getBrowserName(),
+        os: navigator.platform || '',
+        device: getDeviceType(),
+        platform: navigator.platform || '',
+        language: navigator.language || '',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+        screen: `${window.screen.width}x${window.screen.height}`,
+        colorDepth: window.screen.colorDepth || '',
+        pixelRatio: window.devicePixelRatio || 1,
+        deviceMemory: navigator.deviceMemory || null,
+        hardwareConcurrency: navigator.hardwareConcurrency || null,
+        cookiesEnabled: navigator.cookieEnabled,
+        doNotTrack: navigator.doNotTrack || window.doNotTrack || '',
+        referrer: document.referrer || '',
+        vendor: navigator.vendor || '',
+        maxTouchPoints: navigator.maxTouchPoints || 0,
+        online: navigator.onLine,
+        origin: window.location.origin || ''
+      };
+    }
+
     // Show message
     function showMessage(elementId, message, type = 'info') {
       const messageEl = document.getElementById(elementId);
@@ -404,7 +445,7 @@
         const response = await fetch(`${API_URL}/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, licenseCode })
+          body: JSON.stringify({ email, password, licenseCode, clientInfo: getClientInfo() })
         });
 
         const data = await response.json();

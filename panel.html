@@ -1,5 +1,21 @@
 <head>
     <script>
+        function logoutUser() {
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+
+        function renderUserBadge() {
+            const badge = document.getElementById('user-badge');
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (!badge || !user) return;
+            badge.innerHTML = `<span style="font-weight:700;">${user.email || 'konto'}</span> <button onclick="logoutUser()" style="margin-left:8px; border:none; background:#26c8ff; color:#071018; border-radius:999px; padding:4px 10px; cursor:pointer; font-weight:700;">Wyloguj</button>`;
+            badge.style.display = 'flex';
+            badge.style.alignItems = 'center';
+        }
+
+        renderUserBadge();
+
         let lastScrollY = window.scrollY;
         let barHidden = false;
         window.addEventListener('DOMContentLoaded', function() {
@@ -97,10 +113,11 @@
     </style>
 </head>
 <body>
-    <div class="top-bar-buttons">
+    <div class="top-bar-buttons" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
         <a href="index.html" class="back-home-btn">
             <span class="back-arrow">&#8592;</span> Strona główna
         </a>
+        <div id="user-badge" style="display:none; background:rgba(8,18,35,0.9); border:1px solid rgba(255,255,255,0.12); color:#e8f1ff; border-radius:999px; padding:8px 12px; font-size:0.95rem; box-shadow:0 8px 24px rgba(0,0,0,0.2);"></div>
         <a href="https://guns.lol/bonciu" class="contact-btn" target="_blank" rel="noopener">Kontakt</a>
     </div>
     <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
@@ -414,6 +431,6 @@
             color: #232526;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="assets/access.js"></script>
+    <script src="assets/license-check.js"></script>
 </body>

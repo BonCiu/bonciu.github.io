@@ -16,19 +16,185 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
+const getClientIp = (req) => {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (typeof forwarded === 'string' && forwarded.trim()) {
+    return forwarded.split(',')[0].trim();
+  }
+  return req.ip || req.socket?.remoteAddress || 'unknown';
+};
+
+const parseUserAgentInfo = (userAgent = '') => {
+  const ua = userAgent.toLowerCase();
+  let browser = 'Unknown';
+  if (ua.includes('edg/')) browser = 'Edge';
+  else if (ua.includes('chrome') && !ua.includes('edg')) browser = 'Chrome';
+  else if (ua.includes('firefox')) browser = 'Firefox';
+  else if (ua.includes('safari')) browser = 'Safari';
+  else if (ua.includes('opr/')) browser = 'Opera';
+  else if (ua.includes('brave')) browser = 'Brave';
+
+  let os = 'Unknown';
+  if (ua.includes('windows')) os = 'Windows';
+  else if (ua.includes('mac os')) os = 'macOS';
+  else if (ua.includes('linux')) os = 'Linux';
+  else if (ua.includes('android')) os = 'Android';
+  else if (ua.includes('iphone') || ua.includes('ipad')) os = 'iOS';
+
+  let device = 'Desktop';
+  if (ua.includes('mobile')) device = 'Mobile';
+  else if (ua.includes('tablet') || ua.includes('ipad')) device = 'Tablet';
+
+  return { browser, os, device };
+};
+
+const getLocationFromIp = async (ipAddress) => {
+  if (!ipAddress || ipAddress === 'unknown' || ipAddress.startsWith('::ffff:')) {
+    return 'unknown';
+  }
+
+  const normalizedIp = ipAddress.startsWith('::ffff:') ? ipAddress.replace(/^::ffff:/, '') : ipAddress;
+
+  try {
+    const response = await fetch(`https://ipapi.co/${normalizedIp}/json/`);
+    if (!response.ok) return 'unknown';
+    const data = await response.json();
+    if (data?.error) return 'unknown';
+
+    const parts = [data.city, data.region, data.country_name].filter(Boolean);
+    return parts.length ? parts.join(', ') : 'unknown';
+  } catch (error) {
+    return 'unknown';
+  }
+};
+
+const getRequestMeta = (req) => ({
+  method: req.method || 'GET',
+  path: req.originalUrl || req.url || '',
+  protocol: req.protocol || 'http',
+  host: req.get('host') || '',
+  referer: req.get('referer') || '',
+  origin: req.get('origin') || '',
+  acceptLanguage: req.get('accept-language') || '',
+  acceptEncoding: req.get('accept-encoding') || '',
+  forwardedFor: req.get('x-forwarded-for') || '',
+  realIp: req.get('x-real-ip') || '',
+  cfConnectingIp: req.get('cf-connecting-ip') || '',
+  userAgent: req.get('user-agent') || '',
+  headers: {
+    accept: req.get('accept') || '',
+    'accept-language': req.get('accept-language') || '',
+    referer: req.get('referer') || '',
+    origin: req.get('origin') || '',
+    'user-agent': req.get('user-agent') || '',
+    'sec-ch-ua': req.get('sec-ch-ua') || '',
+    'sec-ch-platform': req.get('sec-ch-platform') || '',
+    'x-forwarded-for': req.get('x-forwarded-for') || '',
+    'x-real-ip': req.get('x-real-ip') || '',
+    'cf-connecting-ip': req.get('cf-connecting-ip') || ''
+  }
+});
+
+const logAccessEvent = async (req, payload = {}) => {
+  const clientInfo = payload.clientInfo || {};
+  const userAgent = clientInfo.userAgent || req.get('user-agent') || '';
+  const ipAddress = getClientIp(req);
+  const uaInfo = parseUserAgentInfo(userAgent);
+  const location = await getLocationFromIp(ipAddress);
+  const requestMeta = getRequestMeta(req);
+
+  const accessLog = {
+    email: payload.email || 'unknown',
+    timestamp: new Date().toISOString(),
+    ipAddress,
+    fullIpAddress: ipAddress,
+    location,
+    userAgent,
+    browser: clientInfo.browser || uaInfo.browser,
+    os: clientInfo.os || uaInfo.os,
+    device: clientInfo.device || uaInfo.device,
+    platform: clientInfo.platform || uaInfo.os,
+    language: clientInfo.language || req.get('accept-language') || '',
+    timezone: clientInfo.timezone || '',
+    screen: clientInfo.screen || '',
+    deviceMemory: clientInfo.deviceMemory || '',
+    hardwareConcurrency: clientInfo.hardwareConcurrency || '',
+    cookiesEnabled: clientInfo.cookiesEnabled || '',
+    doNotTrack: clientInfo.doNotTrack || '',
+    referrer: clientInfo.referrer || requestMeta.referer || '',
+    origin: clientInfo.origin || requestMeta.origin || '',
+    method: requestMeta.method,
+    path: requestMeta.path,
+    requestHeaders: requestMeta.headers,
+    host: requestMeta.host,
+    protocol: requestMeta.protocol,
+    acceptLanguage: requestMeta.acceptLanguage,
+    acceptEncoding: requestMeta.acceptEncoding,
+    forwardedFor: requestMeta.forwardedFor,
+    realIp: requestMeta.realIp,
+    cfConnectingIp: requestMeta.cfConnectingIp,
+    licenseCode: payload.licenseCode || ''
+  };
+
+  const accessLogs = readJSONFile(accessLogsFile);
+  accessLogs.push(accessLog);
+  writeJSONFile(accessLogsFile, accessLogs);
+};
+
 // Data files
-const dataDir = path.join(__dirname, 'data');
+const getStorageDir = () => {
+  const candidates = [
+    process.env.DATA_DIR,
+    process.env.RAILWAY_VOLUME_MOUNT_PATH,
+    process.env.RAILWAY_VOLUME_PATH,
+    process.env.PERSISTENT_STORAGE_PATH,
+    process.env.VOLUME_PATH
+  ].filter(Boolean);
+
+  for (const candidate of candidates) {
+    const resolved = path.resolve(candidate);
+    if (resolved) {
+      return resolved;
+    }
+  }
+
+  return path.join(__dirname, 'data');
+};
+
+const dataDir = getStorageDir();
 const usersFile = path.join(dataDir, 'users.json');
 const licensesFile = path.join(dataDir, 'licenses.json');
 const accessLogsFile = path.join(dataDir, 'access-logs.json');
 
+const ensureDataDirectory = () => {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+};
+
+const migrateLegacyDataFiles = () => {
+  const legacyDataDir = path.join(__dirname, 'data');
+  if (legacyDataDir === dataDir) return;
+
+  const filesToMigrate = ['users.json', 'licenses.json', 'access-logs.json'];
+  filesToMigrate.forEach((fileName) => {
+    const legacyFile = path.join(legacyDataDir, fileName);
+    const targetFile = path.join(dataDir, fileName);
+
+    if (!fs.existsSync(targetFile) && fs.existsSync(legacyFile)) {
+      fs.copyFileSync(legacyFile, targetFile);
+    }
+  });
+};
+
 // Ensure data directory exists
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
+ensureDataDirectory();
+migrateLegacyDataFiles();
 
 // Initialize data files
 const initializeDataFiles = () => {
+  ensureDataDirectory();
+
   if (!fs.existsSync(usersFile)) {
     fs.writeFileSync(usersFile, JSON.stringify([], null, 2));
   }
@@ -138,8 +304,8 @@ app.post('/api/register', (req, res) => {
 });
 
 // 2. LOGOWANIE - Sprawdzenie emailu i hasła
-app.post('/api/login', (req, res) => {
-  const { email, password } = req.body;
+app.post('/api/login', async (req, res) => {
+  const { email, password, licenseCode, clientInfo } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ error: 'Email i hasło są wymagane' });
@@ -161,7 +327,6 @@ app.post('/api/login', (req, res) => {
     return res.status(403).json({ error: 'Nie masz przypisanej licencji' });
   }
 
-  // Sprawdzenie czy licencja jest aktywna
   const licenses = readJSONFile(licensesFile);
   const license = licenses.find(l => l.code === user.license);
 
@@ -169,16 +334,11 @@ app.post('/api/login', (req, res) => {
     return res.status(403).json({ error: 'Twoja licencja nie jest aktywna' });
   }
 
-  // Zapis dostępu do logów
-  const accessLogs = readJSONFile(accessLogsFile);
-  accessLogs.push({
+  await logAccessEvent(req, {
     email,
-    timestamp: new Date().toISOString(),
-    ipAddress: req.ip || 'unknown',
-    userAgent: req.get('user-agent'),
-    licenseCode: user.license
+    licenseCode: licenseCode || user.license,
+    clientInfo
   });
-  writeJSONFile(accessLogsFile, accessLogs);
 
   res.json({
     success: true,
@@ -190,7 +350,7 @@ app.post('/api/login', (req, res) => {
 });
 
 // 3. WERYFIKACJA LICENCJI - Dla frontendu
-app.post('/api/verify-license', (req, res) => {
+app.post('/api/verify-license', async (req, res) => {
   const { email, licenseCode } = req.body;
 
   if (!email || !licenseCode) {
@@ -215,15 +375,11 @@ app.post('/api/verify-license', (req, res) => {
     return res.status(403).json({ error: 'Licencja nie jest aktywna' });
   }
 
-  // Zapis dostępu
-  const accessLogs = readJSONFile(accessLogsFile);
-  accessLogs.push({
+  await logAccessEvent(req, {
     email,
-    timestamp: new Date().toISOString(),
-    ipAddress: req.ip || 'unknown',
-    licenseCode
+    licenseCode,
+    clientInfo: req.body.clientInfo || {}
   });
-  writeJSONFile(accessLogsFile, accessLogs);
 
   res.json({ success: true, message: 'Licencja jest aktywna' });
 });
@@ -357,12 +513,17 @@ app.get('/api/admin/access-logs', (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Backend działa prawidłowo' });
+  res.json({
+    status: 'OK',
+    message: 'Backend działa prawidłowo',
+    storageDir: dataDir
+  });
 });
 
 // Initialize i start
 initializeDataFiles();
 app.listen(PORT, () => {
   console.log(`🚀 Backend uruchomiony na porcie ${PORT}`);
+  console.log(`📦 Zapis danych: ${dataDir}`);
   console.log(`📧 Email: ${process.env.GMAIL_EMAIL}`);
 });

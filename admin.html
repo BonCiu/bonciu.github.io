@@ -344,7 +344,11 @@
 
       <!-- LISTA UŻYTKOWNIKÓW -->
       <div class="admin-card">
-        <h2>👥 Użytkownicy (ostatni 20)</h2>
+        <h2 id="users-title">👥 Wszystkie użytkownicy</h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <input id="user-search" type="text" placeholder="Szukaj użytkownika..." style="flex:1; min-width:220px; height:42px; border-radius:10px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.05); color:#fff; padding:0 12px; box-sizing:border-box;" />
+          <button id="show-without-license-btn" class="admin-button admin-button-secondary" type="button" style="height:42px; padding:0 14px;">Brak licencji</button>
+        </div>
         <div id="users-list" class="users-list">
           <div style="color: rgba(232,241,255,0.5); text-align: center; padding: 20px;">
             Ładowanie...
@@ -371,6 +375,7 @@
   <script>
     const API_URL = 'https://joyful-prosperity-production-6a49.up.railway.app/api';
     let adminToken = localStorage.getItem('admin-token');
+    let allUsers = [];
 
     // Redirect if not logged in
     if (!adminToken) {
@@ -431,6 +436,7 @@
         }
 
         const users = await response.json();
+        allUsers = users;
 
         // Populate select
         const select = document.getElementById('user-select');
@@ -444,11 +450,25 @@
           select.appendChild(option);
         });
 
-        // Update users list
-        const usersList = document.getElementById('users-list');
-        usersList.innerHTML = '';
+        renderUsers(users);
+      } catch (error) {
+        console.error(error);
+        showMessage('assign-message', '❌ ' + error.message, 'error');
+      }
+    }
 
-        users.slice(0, 20).forEach(user => {
+    function renderUsers(users) {
+      const usersList = document.getElementById('users-list');
+      const title = document.getElementById('users-title');
+      usersList.innerHTML = '';
+      title.textContent = `👥 Wszystkie użytkownicy (${users.length})`;
+
+      if (!users.length) {
+        usersList.innerHTML = '<div style="color: rgba(232,241,255,0.5); text-align: center; padding: 20px;">Brak użytkowników</div>';
+        return;
+      }
+
+      users.forEach(user => {
           const item = document.createElement('div');
           item.className = 'user-item';
           
@@ -502,11 +522,19 @@
           item.appendChild(actions);
           usersList.appendChild(item);
         });
-      } catch (error) {
-        console.error(error);
-        showMessage('assign-message', '❌ ' + error.message, 'error');
-      }
     }
+
+    document.getElementById('user-search').addEventListener('input', (event) => {
+      const query = event.target.value.toLowerCase().trim();
+      const filteredUsers = allUsers.filter(user => user.email.toLowerCase().includes(query));
+      renderUsers(filteredUsers);
+    });
+
+    document.getElementById('show-without-license-btn').addEventListener('click', () => {
+      const withoutLicense = allUsers.filter(user => !user.license);
+      renderUsers(withoutLicense);
+      document.getElementById('user-search').value = '';
+    });
 
     // Assign license
     document.getElementById('assign-license-btn').addEventListener('click', async () => {

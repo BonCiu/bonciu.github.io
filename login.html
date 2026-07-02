@@ -466,9 +466,11 @@
             loginTime: new Date().toISOString()
           }));
 
-          // Przekierowanie
+          // Przekierowanie na wcześniej odwiedzoną stronę lub domyślnie na index.html
           setTimeout(() => {
-            window.location.href = 'index.html';
+            const redirectUrl = localStorage.getItem('redirect-after-login') || 'index.html';
+            localStorage.removeItem('redirect-after-login');
+            window.location.href = redirectUrl.startsWith('http') ? redirectUrl : redirectUrl;
           }, 1500);
         } else {
           showMessage('login-message', '❌ ' + data.error, 'error');

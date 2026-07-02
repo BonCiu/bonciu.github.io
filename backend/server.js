@@ -407,12 +407,14 @@ app.get('/api/admin/users', (req, res) => {
   }
 
   const users = readJSONFile(usersFile);
-  const usersWithoutPassword = users.map(u => ({
-    id: u.id,
-    email: u.email,
-    license: u.license,
-    createdAt: u.createdAt
-  }));
+  const usersWithoutPassword = users
+    .map(u => ({
+      id: u.id,
+      email: u.email,
+      license: u.license,
+      createdAt: u.createdAt
+    }))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   res.json(usersWithoutPassword);
 });

@@ -195,6 +195,28 @@
       font-family: monospace;
     }
 
+    .license-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .license-copy-btn {
+      border: 1px solid rgba(87, 217, 253, 0.25);
+      background: rgba(87, 217, 253, 0.12);
+      color: #57d9fd;
+      border-radius: 999px;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .license-copy-btn:hover {
+      background: rgba(87, 217, 253, 0.2);
+    }
+
     .user-actions {
       display: flex;
       gap: 8px;
@@ -312,7 +334,10 @@
 
         <div id="license-code-display" style="display:none; padding: 16px; background: rgba(38, 200, 255, 0.1); border-radius: 12px; border: 1px solid rgba(38, 200, 255, 0.2);">
           <div style="font-size: 0.9rem; color: rgba(232,241,255,0.7); margin-bottom: 8px;">Wygenerowany kod:</div>
-          <div id="license-code" style="font-size: 1.1rem; font-weight: 600; color: #26c8ff; font-family: monospace; word-break: break-all;"></div>
+          <div class="license-row" style="margin-bottom: 8px;">
+            <div id="license-code" style="font-size: 1.1rem; font-weight: 600; color: #26c8ff; font-family: monospace; word-break: break-all;"></div>
+            <button id="copy-generated-license-btn" class="license-copy-btn" type="button">📋 Kopiuj</button>
+          </div>
           <div style="font-size: 0.8rem; color: rgba(232,241,255,0.5); margin-top: 8px;">Email został wysłany na adres użytkownika</div>
         </div>
       </div>
@@ -357,6 +382,37 @@
       const messageEl = document.getElementById(elementId);
       messageEl.textContent = message;
       messageEl.className = `admin-message show ${type}`;
+    }
+
+    async function copyLicense(text, button) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
+
+        if (button) {
+          const originalText = button.textContent;
+          button.textContent = '✓ Skopiowano';
+          button.disabled = true;
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 1500);
+        }
+      } catch (error) {
+        console.error(error);
+        showMessage('assign-message', '❌ Nie udało się skopiować licencji', 'error');
+      }
     }
 
     // Load users
@@ -410,7 +466,18 @@
           const license = document.createElement('div');
           license.className = 'user-license';
           if (user.license) {
-            license.textContent = `Licencja: ${user.license}`;
+            const licenseRow = document.createElement('div');
+            licenseRow.className = 'license-row';
+            const licenseText = document.createElement('span');
+            licenseText.textContent = `Licencja: ${user.license}`;
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'license-copy-btn';
+            copyBtn.type = 'button';
+            copyBtn.textContent = '📋';
+            copyBtn.onclick = () => copyLicense(user.license, copyBtn);
+            licenseRow.appendChild(licenseText);
+            licenseRow.appendChild(copyBtn);
+            license.appendChild(licenseRow);
           } else {
             license.textContent = 'Brak licencji';
             license.style.color = '#ff8585';
@@ -470,6 +537,7 @@
           showMessage('assign-message', '✅ ' + data.message, 'success');
           document.getElementById('license-code').textContent = data.licenseCode;
           document.getElementById('license-code-display').style.display = 'block';
+          document.getElementById('copy-generated-license-btn').onclick = () => copyLicense(data.licenseCode, document.getElementById('copy-generated-license-btn'));
           document.getElementById('user-select').value = '';
           loadUsers();
         } else {
@@ -563,6 +631,13 @@
         console.error(error);
       }
     }
+
+    document.getElementById('copy-generated-license-btn').addEventListener('click', () => {
+      const text = document.getElementById('license-code').textContent;
+      if (text) {
+        copyLicense(text, document.getElementById('copy-generated-license-btn'));
+      }
+    });
 
     // Refresh users
     document.getElementById('refresh-users-btn').addEventListener('click', loadUsers);

@@ -1,10 +1,15 @@
 // Middleware do sprawdzania licencji
 (function checkLicense() {
   const user = localStorage.getItem('user');
-  
+  const path = window.location.pathname.toLowerCase();
+  const isLoginPage = path.endsWith('/login.html');
+  const isAdminPage = path.includes('/admin');
+  const isAdminLoginPage = path.endsWith('/admin-login.html');
+
   if (!user) {
-    // Nie zalogowany - przejdź do logowania
-    if (window.location.pathname !== '/login.html' && !window.location.pathname.includes('admin')) {
+    if (!isLoginPage && !isAdminLoginPage && !isAdminPage) {
+      const returnUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      localStorage.setItem('redirect-after-login', returnUrl || '/');
       window.location.href = '/login.html';
     }
     return;
@@ -14,15 +19,17 @@
     const userData = JSON.parse(user);
     console.log('✅ Użytkownik zalogowany:', userData.email);
   } catch (e) {
-    // Nieprawidłowe dane - wyczyść i przejdź do logowania
     localStorage.removeItem('user');
-    window.location.href = '/login.html';
+    if (!isLoginPage) {
+      window.location.href = '/login.html';
+    }
   }
 })();
 
 // Funkcja do wylogowania
 function logout() {
   localStorage.removeItem('user');
+  localStorage.removeItem('redirect-after-login');
   window.location.href = '/login.html';
 }
 
